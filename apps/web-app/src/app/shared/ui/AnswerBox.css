@@ -1,0 +1,16 @@
+.answer-container {
+  border: 1px solid black;
+  width: 80%;
+  padding: 10px;
+  cursor: pointer;
+  margin: 8px;
+  border-radius: 10px;
+}
+
+.right-answer {
+   background-color: green;
+}
+
+.wrong-answer {
+  background-color: red;
+}
