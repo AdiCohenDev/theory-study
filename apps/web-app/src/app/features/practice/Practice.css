@@ -1,0 +1,59 @@
+.practice-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.question {
+  margin: 10px;
+  font-size: 24px;
+  width: 90%;
+}
+
+.answers-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.navigate-questions {
+  display: flex;
+  justify-content: space-between;
+  width: 95%;
+}
+
+.show-right-answer-btn {
+  margin: 24px;
+  padding: 8px;
+  background-color: green;
+  border: none;
+  border-radius: 8px;
+  color: whitesmoke;
+  cursor: pointer;
+}
+
+.level-btn {
+  padding: 10px 15px;
+  border: none;
+  margin: 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  color: whitesmoke;
+  background-color: #262626;
+}
+
+.finish-practice-btn {
+  width: 90%;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  color: whitesmoke;
+  background-color: #262626;
+  margin: 26px;
+  position: absolute;
+  bottom: 0;
+}

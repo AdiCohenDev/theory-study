@@ -10,6 +10,7 @@
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.1",
+    "classnames": "^2.3.1",
     "core-js": "^3.6.5",
     "firebase": "^9.6.11",
     "mobx-react": "^7.4.0",

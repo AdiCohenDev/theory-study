@@ -39,17 +39,13 @@ const Login = () => {
   };
 
   async function confirmCode(code: string) {
-    try {
-      const result = await confirmationResult.confirm(code);
-      const userResults = result.user;
-      const user = {
-        id: userResults.uid,
-        phone: userResults.phoneNumber,
-      };
-      dispatch(setUser(user));
-    } catch (e) {
-      console.error(e);
-    }
+    const result = await confirmationResult.confirm(code);
+    const userResults = result.user;
+    const user = {
+      id: userResults.uid,
+      phone: userResults.phoneNumber,
+    };
+    dispatch(setUser(user));
   }
 
   const handlePhoneInputChange = (event: ChangeEvent<HTMLInputElement>): void => {

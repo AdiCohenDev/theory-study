@@ -4,11 +4,7 @@ import Auth from '../../../../../../../../api/firebase/auth';
 
 const LogoutButton = () => {
   const logout = async () => {
-    try {
-      await signOut(Auth);
-    } catch (error) {
-      console.log(error);
-    }
+    await signOut(Auth);
   };
   return <button onClick={() => logout()}>Log Out</button>;
 };
