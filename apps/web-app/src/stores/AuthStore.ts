@@ -26,7 +26,10 @@ export const authSlice = createSlice({
       state.confirmation = action.payload;
     },
     setUser(state, action) {
-      state.user = action.payload;
+      return {
+        ...state,
+        user: action.payload,
+      };
     },
   },
 });
@@ -34,3 +37,4 @@ export const authSlice = createSlice({
 export const { setConfirmationResult, setUser } = authSlice.actions;
 export default authSlice.reducer;
 export const authSelector = (state: RootState) => state.auth;
+export const selectIsAuth = (state: any) => !!state?.auth?.user;
