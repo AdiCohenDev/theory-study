@@ -1,9 +1,8 @@
 import React, { ChangeEvent, useState } from 'react';
-import Auth from '../../../../../../../../api/firebase/auth';
+import Auth from '../../../../shared/firebase/auth';
 import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth';
 import { UserCredential } from '@firebase/auth';
-import { useDispatch, useSelector } from 'react-redux';
-import { AuthState, setUser } from '../../../../../stores/AuthStore';
+import { useNavigate } from 'react-router-dom';
 
 interface ConfirmationResult {
   readonly verificationId: string;
@@ -15,8 +14,7 @@ const Login = () => {
   const [phoneNumber, setPhoneNumber] = useState<string>('');
   const [code, setCode] = useState<string>('');
 
-  const stateUser = useSelector((state: AuthState) => state.user);
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const signInWithPhoneNumbers = async (phone: any) => {
     const appVerifier = new RecaptchaVerifier(
@@ -39,13 +37,8 @@ const Login = () => {
   };
 
   async function confirmCode(code: string) {
-    const result = await confirmationResult.confirm(code);
-    const userResults = result.user;
-    const user = {
-      id: userResults.uid,
-      phone: userResults.phoneNumber,
-    };
-    dispatch(setUser(user));
+    await confirmationResult.confirm(code);
+    navigate('/');
   }
 
   const handlePhoneInputChange = (event: ChangeEvent<HTMLInputElement>): void => {

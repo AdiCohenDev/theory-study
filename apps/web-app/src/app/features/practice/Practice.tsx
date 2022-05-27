@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import AnswerBox from '../../shared/ui/AnswerBox';
+import AnswerBox from '../../shared/components/AnswerBox/AnswerBox';
 import './Practice.css';
 
 interface CurrentQuestion {
@@ -94,8 +94,8 @@ const Practice = () => {
               saveUserProgress={() => saveUserProgress(answer)}
               text={answer.answer}
               isCorrect={answer.isCorrect}
-              key={answer?.id}
-              id={answer?.id}
+              key={answer.id}
+              id={answer.id}
               showIfCorrect={showCorrectAnswer}
               userAnswerId={userAnswerId}
             />
