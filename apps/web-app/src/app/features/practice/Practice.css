@@ -57,3 +57,7 @@
   position: absolute;
   bottom: 0;
 }
+
+.question-navigation {
+  cursor: pointer;
+}
