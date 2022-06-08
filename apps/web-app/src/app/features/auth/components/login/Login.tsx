@@ -3,6 +3,7 @@ import Auth from '../../../../shared/firebase/auth';
 import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth';
 import { UserCredential } from '@firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import Axios from 'axios';
 
 interface ConfirmationResult {
   readonly verificationId: string;
@@ -31,8 +32,10 @@ const Login = () => {
     const localPhoneNum = phone.slice(numOfLastDigits);
     const countryPrefix = '+972';
     const completePhoneNum = countryPrefix + localPhoneNum;
+    //output string
 
     const confirmation = await signInWithPhoneNumber(Auth, completePhoneNum, appVerifier);
+    await addUserToDB(completePhoneNum);
     setConfirmationResult(confirmation);
   };
 
@@ -40,6 +43,13 @@ const Login = () => {
     await confirmationResult.confirm(code);
     navigate('/');
   }
+
+  const addUserToDB = async (userPhone: string) => {
+    // @ts-ignore
+    const response = await Axios.post('http://localhost:3000/user', {
+      phone: userPhone,
+    }).then((res) => console.log(res.data));
+  };
 
   const handlePhoneInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setPhoneNumber(event.target.value);
@@ -56,7 +66,7 @@ const Login = () => {
         <input type="text" id="nickname" />
         <button onClick={() => signInWithPhoneNumbers(phoneNumber)}>
           <span>הירשם</span>
-          <div id="sign-in-button"></div>
+          <div id="sign-in-button"> </div>
         </button>
       </>
     );
@@ -66,7 +76,7 @@ const Login = () => {
       <input type="text" id="userCode" value={code} onChange={(event) => setCode(event.target.value)} />
       <button title="Confirm Code" onClick={() => confirmCode(code)}>
         Log in and confirm
-        <div id="sign-in-button"></div>
+        <div id="sign-in-button"> </div>
       </button>
     </>
   );
