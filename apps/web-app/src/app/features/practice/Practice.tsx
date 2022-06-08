@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import AnswerBox from '../../shared/components/AnswerBox/AnswerBox';
 import './Practice.css';
+import Axios from 'axios';
 
 interface CurrentQuestion {
   question: string;
   answers: Array<Answer>;
-  num: number;
+  id: number;
+  img: string;
+  category: string;
 }
 
 interface Answer {
-  answer: string;
+  caption: string;
   id: number;
   isCorrect: boolean;
 }
@@ -22,77 +25,57 @@ const Practice = () => {
   const [userAnswers, setUserAnswers] = useState<UserAnswers>({});
   const [showCorrectAnswer, setShowCorrectAnswer] = useState<boolean>(false);
   const [userAnswerId, setUserAnswerId] = useState<number>(null!);
-
-  const questions = [
-    {
-      question: ' איזו חובה מוטלת על נהג המתקרב למפגש מסילת ברזל המוגן במחסום ומוצב בו רמזור?',
-      num: 1,
-      answers: [
-        { answer: 'חובה עליו להאט תמיד', id: 1, isCorrect: false },
-        { answer: 'עליו להתנהג כרגיל. נהיגה זהירה מחויבת רק כאשר נראית באו נשמעת רכבת מתקרבת', id: 2, isCorrect: true },
-        { answer: 'רק לכבות רדיו המותקן ברכב.', id: 3, isCorrect: false },
-        { answer: 'עליו להתנהג כרגיל. במפגש שיש בו מחסום ניתן להיות פחות עירניים', id: 4, isCorrect: false },
-      ],
-    },
-    {
-      question: 'מה פירוש התמרור?',
-      num: 2,
-      answers: [
-        { answer: 'זהירות! ילדים בקרבת מקום', id: 1, isCorrect: false },
-        { answer: 'זהירות!שביל להולכי רגל', id: 2, isCorrect: false },
-        { answer: 'מעבר חצייה לילדים בלבד.', id: 3, isCorrect: false },
-        { answer: 'מעבר חצייה להולכי רגל לפנייך.', id: 4, isCorrect: true },
-      ],
-    },
-    {
-      question: 'האם חובה לציית להוראות שוטר שהזדהה בתעודת מינוי?',
-      num: 3,
-      answers: [
-        { answer: 'לא. חייבים לציית רק לשוטר תנועה בהכוונת תנועה בצומת.', id: 1, isCorrect: false },
-        { answer: 'בדרך כלל לא.', id: 2, isCorrect: false },
-        { answer: 'כן. לעניין הכוונת תנועה בצומת בלבד.', id: 3, isCorrect: false },
-        { answer: 'כן. אף אם ההוראות מנוגדות להוראות התמרור', id: 4, isCorrect: true },
-      ],
-    },
-  ];
+  const [allQuestions, setAllQuestions] = useState([]);
 
   useEffect(() => {
-    setCurrentQuestion(questions[questionNum]);
+    setCurrentQuestion(allQuestions[questionNum]);
   }, [questionNum]);
 
+  const fetchAllQuestions = async () => {
+    const response = await Axios.post('http://localhost:3000/questions').then((res) => {
+      return res.data.questions;
+    });
+    setAllQuestions(response);
+  };
   const saveUserProgress = (event: any) => {
     console.log(event.id);
-    userAnswers[currentQuestion.num] = event.id;
+    userAnswers[currentQuestion.id] = event.id;
 
     setUserAnswers({
       ...userAnswers,
     });
     console.log(userAnswers);
+    setShowCorrectAnswer(true);
   };
   const prevQuestion = () => {
     if (questionNum > 0) {
       setQuestionNum(questionNum - 1);
     }
+    setShowCorrectAnswer(false);
   };
   const nextQuestion = () => {
-    if (questionNum < questions.length - 1) {
+    if (questionNum < allQuestions.length - 1) {
       setQuestionNum(questionNum + 1);
     }
+    setShowCorrectAnswer(false);
   };
   const correctAnswerReveal = () => {
     setShowCorrectAnswer(true);
-    const userAnswerId = userAnswers[currentQuestion.num];
+    const userAnswerId = userAnswers[currentQuestion.id];
     setUserAnswerId(userAnswerId);
   };
   return (
     <div className="practice-container">
       <div className="question">{currentQuestion?.question}</div>
+      {currentQuestion?.img ? (
+        <img src={currentQuestion.img} width="300" height="300" alt={currentQuestion.category} />
+      ) : null}
       <div className="answers-container">
         {currentQuestion?.answers.map((answer) => {
           return (
             <AnswerBox
               saveUserProgress={() => saveUserProgress(answer)}
-              text={answer.answer}
+              text={answer.caption}
               isCorrect={answer.isCorrect}
               key={answer.id}
               id={answer.id}
@@ -114,6 +97,7 @@ const Practice = () => {
         <button className="level-btn">קל</button>
         <button className="level-btn">בינוני</button>
         <button className="level-btn">קשה</button>
+        <button onClick={fetchAllQuestions}>fetch</button>
       </div>
       <button className="finish-practice-btn">סיים תרגול</button>
     </div>
