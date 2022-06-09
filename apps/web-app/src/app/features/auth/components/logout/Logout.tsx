@@ -6,7 +6,11 @@ const LogoutButton = () => {
   const logout = async () => {
     await signOut(Auth);
   };
-  return <button onClick={() => logout()}>Log Out</button>;
+  return (
+    <>
+      <button onClick={() => logout()}>Log Out</button>
+    </>
+  );
 };
 
 export default LogoutButton;
