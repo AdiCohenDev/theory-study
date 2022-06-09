@@ -7,14 +7,14 @@ interface Props {
   id: number;
   showIfCorrect: boolean;
   isCorrect: boolean;
-  userAnswerId: number;
+  userAnswerId: number | undefined;
   saveUserProgress(event: any): void;
 }
 
 const AnswerBox = ({ text, id, userAnswerId, saveUserProgress, showIfCorrect, isCorrect }: Props) => {
   const showCorrectAnswerClasses = classNames('answer-container', {
-    'right-answer': showIfCorrect === true && isCorrect === true,
-    'wrong-answer': showIfCorrect === true && !isCorrect && userAnswerId === id,
+    'right-answer': showIfCorrect && isCorrect,
+    'wrong-answer': showIfCorrect && !isCorrect && userAnswerId === id,
   });
 
   return (
