@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import AnswerBox from '../../shared/components/AnswerBox/AnswerBox';
 import './Practice.css';
 import { fetchQuestionForUser } from './questions';
-import Axios from 'axios';
+import type { IUserPracticeQuestions } from './questions';
 
 interface CurrentQuestion {
   question: string;
@@ -10,6 +10,8 @@ interface CurrentQuestion {
   id: number;
   img: string;
   category: string;
+  never?: string;
+  expDate?: string;
 }
 
 interface Answer {
@@ -28,30 +30,32 @@ export type UserAnswers = Record<number, userAnswer>;
 
 const Practice = () => {
   const [currentQuestion, setCurrentQuestion] = useState<CurrentQuestion>(null!);
-  const [allQuestions, setAllQuestions] = useState([]);
-  const [questionNum, setQuestionNum] = useState(0);
+  const [allQuestions, setAllQuestions] = useState<IUserPracticeQuestions[]>([]);
+  const [questionNum, setQuestionNum] = useState<number>(0);
   const [userAnswers, setUserAnswers] = useState<UserAnswers>({});
   const [showCorrectAnswer, setShowCorrectAnswer] = useState<boolean>(false);
   const [userAnswerId, setUserAnswerId] = useState<number | undefined>(null!);
 
   useEffect(() => {
-    fetchQuestionForUser();
+    fetchQuestionForUser()
+      .then((results) => {
+        setAllQuestions(results);
+        setCurrentQuestion(results[questionNum]);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
+
+  useEffect(() => {
     setCurrentQuestion(allQuestions[questionNum]);
   }, [questionNum]);
 
-  const fetchAllQuestions = async () => {
-    const response = await Axios.post('http://localhost:3000/questions').then((res) => {
-      return res.data.questions;
-    });
-    setAllQuestions(response);
-  };
-  
   const saveUserProgress = (event: any) => {
     userAnswers[currentQuestion.id] = {};
     userAnswers[currentQuestion.id].answerId = event.id;
     const userAnswerId = userAnswers[currentQuestion.id].answerId;
     setUserAnswerId(userAnswerId);
-
 
     setUserAnswers({
       ...userAnswers,
@@ -67,7 +71,6 @@ const Practice = () => {
     if (showCorrectAnswer) {
       setShowCorrectAnswer(false);
     }
-
   };
   const nextQuestion = () => {
     if (questionNum < allQuestions.length - 1) {
@@ -110,10 +113,10 @@ const Practice = () => {
       never = true;
     }
     if (never) {
-      userAnswers[currentQuestion.num].never = true;
+      userAnswers[currentQuestion.id].never = true;
     } else {
       const expDate = new Date(new Date().getTime() + seconds * 1000).toISOString();
-      userAnswers[currentQuestion.num].expDate = expDate;
+      userAnswers[currentQuestion.id].expDate = expDate;
     }
     nextQuestion();
   };
@@ -154,7 +157,6 @@ const Practice = () => {
         הצג תשובה נכונה
       </button>
       <div>
-
         <button className="level-btn" onClick={questionLevel}>
           {hide}
         </button>
@@ -167,8 +169,7 @@ const Practice = () => {
         <button className="level-btn" onClick={questionLevel}>
           {hard}
         </button>
-        <button onClick={fetchAllQuestions}>fetch</button>
-
+        {/*<button onClick={fetchAllQuestions}>fetch</button>*/}
       </div>
       <button className="finish-practice-btn" onClick={finishPractice}>
         סיים תרגול

@@ -11,11 +11,13 @@ interface ConfirmationResult {
 export interface AuthState {
   confirmation: ConfirmationResult;
   user: object;
+  isLoading: boolean;
 }
 
 export const initialState: AuthState = {
   confirmation: null!,
   user: null!,
+  isLoading: true,
 };
 
 export const authSlice = createSlice({
@@ -29,6 +31,7 @@ export const authSlice = createSlice({
       return {
         ...state,
         user: action.payload,
+        isLoading: false,
       };
     },
   },
@@ -37,4 +40,5 @@ export const authSlice = createSlice({
 export const { setConfirmationResult, setUser } = authSlice.actions;
 export default authSlice.reducer;
 export const authSelector = (state: RootState) => state.auth;
-export const selectIsAuth = (state: any) => !!state?.auth?.user;
+export const selectIsAuth = (state: RootState) => !!state?.auth?.user;
+export const selectIsAuthLoading = (state: RootState) => state.auth.isLoading;
