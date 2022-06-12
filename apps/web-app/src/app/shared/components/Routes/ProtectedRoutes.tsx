@@ -8,24 +8,23 @@ import { selectIsAuth } from '../../../../stores/AuthStore';
 
 const ProtectedRoutes = () => {
   const isAuth = useSelector(selectIsAuth);
+
   return (
-    <>
-      <Routes>
-        {!isAuth && (
-          <>
-            <Route path="login" element={<Login />} />
-            <Route path="*" element={<Navigate to="/login" />} />
-          </>
-        )}
-        {isAuth && (
-          <>
-            <Route path="logout" element={<Logout />} />
-            <Route path="practice" element={<Practice />} />
-            <Route path="*" element={<Navigate to="/logout" />} />
-          </>
-        )}
-      </Routes>
-    </>
+    <Routes>
+      {!isAuth && (
+        <>
+          <Route path="login" element={<Login />} />
+          <Route path="*" element={<Navigate to="/login" />} />
+        </>
+      )}
+      {isAuth && (
+        <>
+          <Route path="logout" element={<Logout />} />
+          <Route path="practice" element={<Practice />} />
+          <Route path="*" element={<Navigate to="/logout" />} />
+        </>
+      )}
+    </Routes>
   );
 };
 
