@@ -1,15 +1,15 @@
-import type { UserAnswers } from './Practice';
+import type { IUserAnswer, UserAnswers } from './Practice';
 import Axios from 'axios';
 
 interface IAllQuestions {
   question: string;
-  answers: Array<Answer>;
+  answers: Array<IAnswer>;
   id: number;
   img: string;
   category: string;
 }
 
-interface Answer {
+interface IAnswer {
   caption: string;
   id: number;
   isCorrect: boolean;
@@ -19,7 +19,7 @@ export interface IUserPracticeQuestions {
   never?: string;
   expDate?: string;
   question: string;
-  answers: Array<Answer>;
+  answers: Array<IAnswer>;
   id: number;
   img: string;
   category: string;
@@ -28,9 +28,9 @@ export interface IUserPracticeQuestions {
 export const fetchQuestionForUser = async () => {
   const allQuestions: IAllQuestions[] = await fetchAllQuestions();
   const userPracticeData: UserAnswers = {
-    1: { answerId: 1, expDate: '2022-06-07T17:17:20.549Z' },
-    2: { answerId: 2, never: true },
-    0: { answerId: 4, expDate: '2022-06-14T17:43:40.478Z' },
+    1: { answerId: 1, expDate: '2022-06-07T17:17:20.549Z' } as IUserAnswer,
+    2: { answerId: 2, never: true } as IUserAnswer,
+    0: { answerId: 4, expDate: '2022-06-14T17:43:40.478Z' } as IUserAnswer,
   };
 
   const filteredQuestionList: IUserPracticeQuestions[] = allQuestions
@@ -62,5 +62,10 @@ const fetchAllQuestions = async () => {
   const response = await Axios.get('http://localhost:3000/questions').then((res) => {
     return res.data.questions;
   });
+  return response;
+};
+
+export const saveUserAnswersInDB = async (userData: IUserAnswer) => {
+  const response = await Axios.post('http://localhost:3000/user-progress', userData);
   return response;
 };

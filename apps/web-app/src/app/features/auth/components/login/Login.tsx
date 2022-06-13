@@ -5,13 +5,13 @@ import { UserCredential } from '@firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 
-interface ConfirmationResult {
+interface IConfirmationResult {
   readonly verificationId: string;
   confirm(verificationCode: string): Promise<UserCredential>;
 }
 
 const Login = () => {
-  const [confirmationResult, setConfirmationResult] = useState<ConfirmationResult>(null!);
+  const [confirmationResult, setConfirmationResult] = useState<IConfirmationResult>(null!);
   const [phoneNumber, setPhoneNumber] = useState<string>('');
   const [code, setCode] = useState<string>('');
 
@@ -32,7 +32,6 @@ const Login = () => {
     const localPhoneNum = phone.slice(numOfLastDigits);
     const countryPrefix = '+972';
     const completePhoneNum = countryPrefix + localPhoneNum;
-    //output string
 
     const confirmation = await signInWithPhoneNumber(Auth, completePhoneNum, appVerifier);
     await addUserToDB(completePhoneNum);

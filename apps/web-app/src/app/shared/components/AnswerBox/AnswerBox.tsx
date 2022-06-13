@@ -2,16 +2,16 @@ import React from 'react';
 import './AnswerBox.css';
 import classNames from 'classnames';
 
-interface Props {
+interface IProps {
   text: string;
   id: number;
   showIfCorrect: boolean;
   isCorrect: boolean;
   userAnswerId: number | undefined;
-  saveUserProgress(event: any): void;
+  saveUserProgress(): void;
 }
 
-const AnswerBox = ({ text, id, userAnswerId, saveUserProgress, showIfCorrect, isCorrect }: Props) => {
+const AnswerBox = ({ text, id, userAnswerId, saveUserProgress, showIfCorrect, isCorrect }: IProps) => {
   const showCorrectAnswerClasses = classNames('answer-container', {
     'right-answer': showIfCorrect && isCorrect,
     'wrong-answer': showIfCorrect && !isCorrect && userAnswerId === id,
