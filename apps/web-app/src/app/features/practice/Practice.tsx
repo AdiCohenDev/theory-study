@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { MouseEventHandler, useEffect, useState } from 'react';
 import AnswerBox from '../../shared/components/AnswerBox/AnswerBox';
 import './Practice.css';
-import { fetchQuestionForUser } from './questions';
+import { fetchQuestionForUser, saveUserAnswersInDB } from './questions';
 import type { IUserPracticeQuestions } from './questions';
+import store from '../../../stores/store';
 
-interface CurrentQuestion {
+interface ICurrentQuestion {
   question: string;
-  answers: Array<Answer>;
+  answers: Array<IAnswer>;
   id: number;
   img: string;
   category: string;
@@ -14,25 +15,27 @@ interface CurrentQuestion {
   expDate?: string;
 }
 
-interface Answer {
+export interface IAnswer {
   caption: string;
   id: number;
   isCorrect: boolean;
 }
 
-interface userAnswer {
-  answerId?: number;
-  expDate?: string;
-  never?: boolean;
+export interface IUserAnswer {
+  answerId: number;
+  expDate: string | null;
+  never: boolean;
+  questionId: number;
+  personId: string;
 }
 
-export type UserAnswers = Record<number, userAnswer>;
+export type UserAnswers = Record<number, IUserAnswer>;
 
 const Practice = () => {
-  const [currentQuestion, setCurrentQuestion] = useState<CurrentQuestion>(null!);
+  const [currentQuestion, setCurrentQuestion] = useState<ICurrentQuestion>(null!);
   const [allQuestions, setAllQuestions] = useState<IUserPracticeQuestions[]>([]);
   const [questionNum, setQuestionNum] = useState<number>(0);
-  const [userAnswers, setUserAnswers] = useState<UserAnswers>({});
+  const [userAnswer, setUserAnswer] = useState<IUserAnswer | null>(null);
   const [showCorrectAnswer, setShowCorrectAnswer] = useState<boolean>(false);
   const [userAnswerId, setUserAnswerId] = useState<number | undefined>(null!);
 
@@ -51,16 +54,16 @@ const Practice = () => {
     setCurrentQuestion(allQuestions[questionNum]);
   }, [questionNum]);
 
-  const saveUserProgress = (event: any) => {
-    userAnswers[currentQuestion.id] = {};
-    userAnswers[currentQuestion.id].answerId = event.id;
-    const userAnswerId = userAnswers[currentQuestion.id].answerId;
-    setUserAnswerId(userAnswerId);
-
-    setUserAnswers({
-      ...userAnswers,
-    });
-
+  const saveUserProgress = (event: IAnswer) => {
+    if (userAnswer) {
+      const userAnswerId = userAnswer.answerId;
+      const newUser: IUserAnswer = {
+        ...userAnswer,
+        answerId: event.id,
+      };
+      setUserAnswer(newUser);
+      setUserAnswerId(userAnswerId);
+    }
     setShowCorrectAnswer(true);
   };
   const prevQuestion = () => {
@@ -73,6 +76,7 @@ const Practice = () => {
     }
   };
   const nextQuestion = () => {
+    setUserAnswer(null);
     if (questionNum < allQuestions.length - 1) {
       setQuestionNum(questionNum + 1);
     }
@@ -83,9 +87,6 @@ const Practice = () => {
   };
   const correctAnswerReveal = () => {
     setShowCorrectAnswer(true);
-    const userAnswerId = userAnswers[currentQuestion.id].answerId;
-
-    setUserAnswerId(userAnswerId);
   };
 
   const easy = 'קל';
@@ -93,8 +94,10 @@ const Practice = () => {
   const hard = 'קשה';
   const hide = 'תסתיר שאלה זו';
 
-  const questionLevel = (e: any) => {
-    const userChoice = e.target.innerText;
+  const personId = store.getState().auth.user.uid;
+
+  const questionLevel = async (e: React.MouseEvent<HTMLElement>) => {
+    const userChoice = (e.target as HTMLElement).innerText;
     let seconds = 60;
     const _2MinuteInSeconds = 120;
     const _1HourInSeconds = 3600;
@@ -112,17 +115,17 @@ const Practice = () => {
     if (userChoice === hide) {
       never = true;
     }
-    if (never) {
-      userAnswers[currentQuestion.id].never = true;
-    } else {
-      const expDate = new Date(new Date().getTime() + seconds * 1000).toISOString();
-      userAnswers[currentQuestion.id].expDate = expDate;
-    }
+    const expDate = never ? null : new Date(new Date().getTime() + seconds * 1000).toISOString();
+    const userAnswer: IUserAnswer = {
+      answerId: userAnswerId as number,
+      never,
+      questionId: currentQuestion.id,
+      expDate,
+      personId,
+    };
+    setUserAnswer(userAnswer);
+    await saveUserAnswersInDB(userAnswer);
     nextQuestion();
-  };
-
-  const finishPractice = () => {
-    //update the db
   };
   return (
     <div className="practice-container">
@@ -169,11 +172,7 @@ const Practice = () => {
         <button className="level-btn" onClick={questionLevel}>
           {hard}
         </button>
-        {/*<button onClick={fetchAllQuestions}>fetch</button>*/}
       </div>
-      <button className="finish-practice-btn" onClick={finishPractice}>
-        סיים תרגול
-      </button>
     </div>
   );
 };

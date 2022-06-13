@@ -2,19 +2,24 @@ import { createSlice } from '@reduxjs/toolkit';
 import { UserCredential } from '@firebase/auth/dist/node-esm';
 import { RootState } from './store';
 
-interface ConfirmationResult {
+interface IConfirmationResult {
   readonly verificationId: string;
 
   confirm(verificationCode: string | undefined): Promise<UserCredential>;
 }
 
-export interface AuthState {
-  confirmation: ConfirmationResult;
-  user: object;
+interface IUser {
+  displayName?: string;
+  phoneNumber?: string;
+  uid: string;
+}
+export interface IAuthState {
+  confirmation: IConfirmationResult;
+  user: IUser;
   isLoading: boolean;
 }
 
-export const initialState: AuthState = {
+export const initialState: IAuthState = {
   confirmation: null!,
   user: null!,
   isLoading: true,
