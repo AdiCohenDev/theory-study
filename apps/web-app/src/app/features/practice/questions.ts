@@ -1,5 +1,7 @@
-import type { IUserAnswer, UserAnswers } from './Practice';
+import type { UserAnswers } from './Practice';
 import Axios from 'axios';
+import { IUserAnswer } from '@theory-study/types';
+import store from '../../../stores/store';
 
 interface IAllQuestions {
   question: string;
@@ -27,11 +29,8 @@ export interface IUserPracticeQuestions {
 
 export const fetchQuestionForUser = async () => {
   const allQuestions: IAllQuestions[] = await fetchAllQuestions();
-  const userPracticeData: UserAnswers = {
-    1: { answerId: 1, expDate: '2022-06-07T17:17:20.549Z' } as IUserAnswer,
-    2: { answerId: 2, never: true } as IUserAnswer,
-    0: { answerId: 4, expDate: '2022-06-14T17:43:40.478Z' } as IUserAnswer,
-  };
+  const userAnswers = await fetchUserAnswersFromDB();
+  const userPracticeData: UserAnswers = userAnswers;
 
   const filteredQuestionList: IUserPracticeQuestions[] = allQuestions
     .filter((question) => {
@@ -61,6 +60,18 @@ export const fetchQuestionForUser = async () => {
 const fetchAllQuestions = async () => {
   const response = await Axios.get('http://localhost:3000/questions').then((res) => {
     return res.data.questions;
+  });
+  return response;
+};
+
+const fetchUserAnswersFromDB = async () => {
+  const personId = store.getState().auth.user.uid;
+  const response = await Axios.get('http://localhost:3000/user-progress', {
+    params: {
+      personId,
+    },
+  }).then((res) => {
+    return res.data.result.rows;
   });
   return response;
 };

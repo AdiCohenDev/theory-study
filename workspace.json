@@ -1,6 +1,7 @@
 {
   "version": 2,
   "projects": {
+    "types": "libs/types",
     "web-api": "apps/web-api",
     "web-app": "apps/web-app",
     "web-app-e2e": "apps/web-app-e2e"

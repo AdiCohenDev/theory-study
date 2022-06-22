@@ -1,9 +1,23 @@
 import client from '../../db';
+import { IUserAnswer } from '@theory-study/types';
 
-export const saveUserAnswersInDB = async (userProgress) => {
-  const keys = Object.keys(userProgress).join(',');
-  const values = Object.values(userProgress)
-    .map((prop) => `'${prop}'`)
-    .join(',');
-  return await client.query(`INSERT INTO user_answers (${keys}) VALUES (${values})`);
+export const saveUserAnswersInDB = async (userProgress: IUserAnswer) => {
+  const values = Object.values(userProgress);
+  const params = Object.keys(userProgress).map((_, index) => `$${index + 1}`);
+  console.log({ values: values, nums: params });
+
+  const res = await client.query(
+    `INSERT INTO user_answers (answerId, never, questionId, expDate, personId)
+VALUES (${params})
+ON CONFLICT (personId, questionId) DO update
+set never = EXCLUDED.never, expDate = EXCLUDED.expDate;`,
+    values
+  );
+  return res;
+};
+
+export const getUserAnswersFromDB = async (id: any) => {
+  const personId = id.personId;
+  const res = await client.query(`SELECT * FROM user_answers WHERE personId = '${personId}'`);
+  return res;
 };
