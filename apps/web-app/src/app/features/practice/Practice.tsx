@@ -1,9 +1,10 @@
-import React, { MouseEventHandler, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import AnswerBox from '../../shared/components/AnswerBox/AnswerBox';
 import './Practice.css';
-import { fetchQuestionForUser, saveUserAnswersInDB } from './questions';
 import type { IUserPracticeQuestions } from './questions';
+import { fetchQuestionForUser, saveUserAnswersInDB } from './questions';
 import store from '../../../stores/store';
+import { IUserAnswer } from '@theory-study/types';
 
 interface ICurrentQuestion {
   question: string;
@@ -19,14 +20,6 @@ export interface IAnswer {
   caption: string;
   id: number;
   isCorrect: boolean;
-}
-
-export interface IUserAnswer {
-  answerId: number;
-  expDate: string | null;
-  never: boolean;
-  questionId: number;
-  personId: string;
 }
 
 export type UserAnswers = Record<number, IUserAnswer>;
@@ -55,15 +48,14 @@ const Practice = () => {
   }, [questionNum]);
 
   const saveUserProgress = (event: IAnswer) => {
-    if (userAnswer) {
-      const userAnswerId = userAnswer.answerId;
-      const newUser: IUserAnswer = {
-        ...userAnswer,
-        answerId: event.id,
-      };
-      setUserAnswer(newUser);
-      setUserAnswerId(userAnswerId);
-    }
+    const answer = userAnswer || ({} as IUserAnswer);
+    const answerId = event.id;
+    const newUser: IUserAnswer = {
+      ...answer,
+      answerId,
+    };
+    setUserAnswer(newUser);
+    setUserAnswerId(answerId);
     setShowCorrectAnswer(true);
   };
   const prevQuestion = () => {
