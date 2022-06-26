@@ -1,4 +1,4 @@
-import client from '../../db';
+import client from '../../../db';
 import { IUserAnswer } from '@theory-study/types';
 
 export const saveUserAnswersInDB = async (userProgress: IUserAnswer) => {
@@ -7,10 +7,10 @@ export const saveUserAnswersInDB = async (userProgress: IUserAnswer) => {
   console.log({ values: values, nums: params });
 
   const res = await client.query(
-    `INSERT INTO user_answers (answerId, never, questionId, expDate, personId)
+    `INSERT INTO user_answers (answerId, never, questionId, expDate, personId, isCorrect)
 VALUES (${params})
 ON CONFLICT (personId, questionId) DO update
-set never = EXCLUDED.never, expDate = EXCLUDED.expDate;`,
+set never = EXCLUDED.never, expDate = EXCLUDED.expDate, isCorrect = EXCLUDED.isCorrect;`,
     values
   );
   return res;

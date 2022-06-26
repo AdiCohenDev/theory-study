@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useState } from 'react';
-import Auth from '../../../../shared/firebase/auth';
+import Auth from '../../../../shared/firebase/Auth';
 import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth';
 import { UserCredential } from '@firebase/auth';
 import { useNavigate } from 'react-router-dom';

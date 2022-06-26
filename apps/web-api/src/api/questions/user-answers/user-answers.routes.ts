@@ -1,5 +1,5 @@
 import express from 'express';
-import { getUserAnswers, setUserAnswers } from './userProgress.controller';
+import { getUserAnswers, setUserAnswers } from './user-answers.controller';
 
 const router = express.Router();
 

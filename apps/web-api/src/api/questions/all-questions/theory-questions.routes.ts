@@ -1,5 +1,5 @@
 import express from 'express';
-import { getQuestions } from './questions.controller';
+import { getQuestions } from './theory-questions.controller';
 
 const router = express.Router();
 

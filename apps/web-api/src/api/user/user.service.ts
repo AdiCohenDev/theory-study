@@ -1,5 +1,5 @@
 import client from '../../db';
-import { IUser } from '../../../../web-app/src/app/features/auth/shared/models/user';
+import { IUser } from '../../../../web-app/src/app/features/auth/shared/models/User';
 
 export const saveUserInDB = async (user: IUser) => {
   const keys = Object.keys(user).join(',');

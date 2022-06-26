@@ -1,4 +1,4 @@
-import './navbar.css';
+import './Navbar.css';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import MobileNavbar from './MobileNavbar';
@@ -20,6 +20,10 @@ const Navbar = () => {
     textDecoration: 'none',
   };
   const navItems = [
+    {
+      to: '/',
+      caption: 'עמוד הבית',
+    },
     {
       to: '/login',
       caption: 'התחברות',

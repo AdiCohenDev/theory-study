@@ -1,31 +1,7 @@
 import type { UserAnswers } from './Practice';
 import Axios from 'axios';
-import { IUserAnswer } from '@theory-study/types';
-import store from '../../../stores/store';
-
-interface IAllQuestions {
-  question: string;
-  answers: Array<IAnswer>;
-  id: number;
-  img: string;
-  category: string;
-}
-
-interface IAnswer {
-  caption: string;
-  id: number;
-  isCorrect: boolean;
-}
-
-export interface IUserPracticeQuestions {
-  never?: string;
-  expDate?: string;
-  question: string;
-  answers: Array<IAnswer>;
-  id: number;
-  img: string;
-  category: string;
-}
+import { IAllQuestions, IUserAnswer, IUserPracticeQuestions } from '@theory-study/types';
+import store from '../../../stores/Store';
 
 export const fetchQuestionForUser = async () => {
   const allQuestions: IAllQuestions[] = await fetchAllQuestions();
@@ -57,16 +33,16 @@ export const fetchQuestionForUser = async () => {
   return filteredQuestionList;
 };
 
-const fetchAllQuestions = async () => {
+export const fetchAllQuestions = async () => {
   const response = await Axios.get('http://localhost:3000/questions').then((res) => {
     return res.data.questions;
   });
   return response;
 };
 
-const fetchUserAnswersFromDB = async () => {
+export const fetchUserAnswersFromDB = async () => {
   const personId = store.getState().auth.user.uid;
-  const response = await Axios.get('http://localhost:3000/user-progress', {
+  const response = await Axios.get('http://localhost:3000/user-answers', {
     params: {
       personId,
     },
@@ -77,6 +53,6 @@ const fetchUserAnswersFromDB = async () => {
 };
 
 export const saveUserAnswersInDB = async (userData: IUserAnswer) => {
-  const response = await Axios.post('http://localhost:3000/user-progress', userData);
+  const response = await Axios.post('http://localhost:3000/user-answers', userData);
   return response;
 };

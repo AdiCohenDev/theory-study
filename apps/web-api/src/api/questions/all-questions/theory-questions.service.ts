@@ -1,8 +1,23 @@
 import jsdom from 'jsdom';
 const { JSDOM } = jsdom;
 import axios from 'axios';
+import NodeCache from 'node-cache';
+import { IAllQuestions } from '@theory-study/types';
 
-export const getQuestionsAPI = async () => {
+const nodeCache = new NodeCache();
+
+export const getQuestionsAPI = async (): Promise<IAllQuestions[]> => {
+  const CACHE_KEY = 'theory_questions';
+  let theoryQuestions = nodeCache.get<IAllQuestions[]>(CACHE_KEY);
+  if (!theoryQuestions) {
+    theoryQuestions = await getQuestionsFromGov();
+    nodeCache.set(CACHE_KEY, theoryQuestions);
+  }
+  return theoryQuestions;
+  //res.set('Cache-Control', 'public, max-age=604800'); // one week
+};
+
+const getQuestionsFromGov = async () => {
   const dom = new JSDOM(`<!DOCTYPE html><body><div class="container"></div></body>`);
   const container = dom.window.document.querySelector('.container');
   const limit = 5000;
@@ -12,7 +27,7 @@ export const getQuestionsAPI = async () => {
     const URLResponse = await axios.get(URL);
     const theoryQuestions = URLResponse.data;
     const newDiv = dom.window.document.createElement('div');
-    const allRecords = [];
+    const allRecords: IAllQuestions[] = [];
     const records = theoryQuestions.result.records;
     for (const record of records) {
       const htmlText = record.description4;
@@ -56,7 +71,6 @@ export const getQuestionsAPI = async () => {
         allRecords.push(recordObj);
       }
     }
-
     return allRecords;
   } catch (error) {
     console.error(error);
