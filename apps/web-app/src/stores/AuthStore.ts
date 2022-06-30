@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { UserCredential } from '@firebase/auth/dist/node-esm';
-import { RootState } from './store';
+import { RootState } from './Store';
 
 interface IConfirmationResult {
   readonly verificationId: string;

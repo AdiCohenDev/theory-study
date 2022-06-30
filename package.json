@@ -12,6 +12,8 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.1",
     "@types/pg": "^8.6.5",
+    "chart.js": "^3.8.0",
+    "chartjs-plugin-datalabels": "^2.0.0",
     "classnames": "^2.3.1",
     "core-js": "^3.6.5",
     "cors": "^2.8.5",
@@ -22,6 +24,7 @@
     "node-cache": "^5.1.2",
     "pg": "^8.7.3",
     "react": "18.0.0",
+    "react-chartjs-2": "^4.2.0",
     "react-dom": "18.0.0",
     "react-icons": "^4.3.1",
     "react-redux": "^8.0.1",

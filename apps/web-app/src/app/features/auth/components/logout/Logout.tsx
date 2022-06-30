@@ -1,6 +1,6 @@
 import React from 'react';
 import { signOut } from 'firebase/auth';
-import Auth from '../../../../shared/firebase/auth';
+import Auth from '../../../../shared/firebase/Auth';
 
 const LogoutButton = () => {
   const logout = async () => {

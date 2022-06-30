@@ -1,25 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import AnswerBox from '../../shared/components/AnswerBox/AnswerBox';
 import './Practice.css';
-import type { IUserPracticeQuestions } from './questions';
-import { fetchQuestionForUser, saveUserAnswersInDB } from './questions';
-import store from '../../../stores/store';
+import { IAnswer, IUserPracticeQuestions } from '@theory-study/types';
+import { fetchQuestionForUser, saveUserAnswersInDB } from './Questions';
+import store from '../../../stores/Store';
 import { IUserAnswer } from '@theory-study/types';
 
 interface ICurrentQuestion {
   question: string;
   answers: Array<IAnswer>;
   id: number;
-  img: string;
+  img?: string;
   category: string;
   never?: string;
   expDate?: string;
-}
-
-export interface IAnswer {
-  caption: string;
-  id: number;
-  isCorrect: boolean;
 }
 
 export type UserAnswers = Record<number, IUserAnswer>;
@@ -107,6 +101,14 @@ const Practice = () => {
     if (userChoice === hide) {
       never = true;
     }
+    const hasUserAnsweredCorrectly = (): number | void => {
+      for (const answer of currentQuestion.answers) {
+        if (answer.isCorrect) {
+          return answer.id;
+        }
+      }
+    };
+    const isCorrect: boolean = userAnswerId === hasUserAnsweredCorrectly();
     const expDate = never ? null : new Date(new Date().getTime() + seconds * 1000).toISOString();
     const userAnswer: IUserAnswer = {
       answerId: userAnswerId as number,
@@ -114,9 +116,11 @@ const Practice = () => {
       questionId: currentQuestion.id,
       expDate,
       personId,
+      isCorrect,
     };
     setUserAnswer(userAnswer);
     await saveUserAnswersInDB(userAnswer);
+
     nextQuestion();
   };
   return (
