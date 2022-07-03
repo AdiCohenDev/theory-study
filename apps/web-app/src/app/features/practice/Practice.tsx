@@ -127,7 +127,7 @@ const Practice = () => {
     <div className="practice-container">
       <div className="question">{currentQuestion?.question}</div>
       {currentQuestion?.img ? (
-        <img src={currentQuestion.img} width="300" height="300" alt={currentQuestion.category} />
+        <img src={currentQuestion.img} className="question-img" alt={currentQuestion.category} />
       ) : null}
       <div className="answers-container">
         {currentQuestion?.answers.map((answer) => {

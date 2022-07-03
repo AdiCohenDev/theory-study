@@ -6,7 +6,7 @@ import Logout from '../../../features/auth/components/logout/Logout';
 import Practice from '../../../features/practice/Practice';
 import { selectIsAuth } from '../../../../stores/AuthStore';
 import Home from '../../../features/auth/components/home/Home';
-
+import Settings from '../../../features/settings/Settings';
 const ProtectedRoutes = () => {
   const isAuth = useSelector(selectIsAuth);
 
@@ -20,8 +20,8 @@ const ProtectedRoutes = () => {
       )}
       {isAuth && (
         <>
-          <Route path="logout" element={<Logout />} />
           <Route path="practice" element={<Practice />} />
+          <Route path="settings" element={<Settings />} />
           <Route path="/" element={<Home />} />
           <Route path="*" element={<Navigate to="/" />} />
         </>

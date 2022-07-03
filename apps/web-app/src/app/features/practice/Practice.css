@@ -1,9 +1,10 @@
+
+
 .practice-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
 }
 
 .question {
@@ -28,7 +29,7 @@
 .show-right-answer-btn {
   margin: 24px;
   padding: 8px;
-  background-color: green;
+  background-color: var(--success);
   border: none;
   border-radius: 8px;
   color: whitesmoke;
@@ -42,7 +43,7 @@
   border-radius: 10px;
   cursor: pointer;
   color: whitesmoke;
-  background-color: #262626;
+  background-color: var(--blue);
 }
 
 .finish-practice-btn {
@@ -60,4 +61,30 @@
 
 .question-navigation {
   cursor: pointer;
+}
+.question-img {
+  width: 300px;
+  height: 200px;
+
+}
+@media only screen and (min-width: 1000px) {
+
+body {
+  background-color: whitesmoke;
+}
+  .practice-container {
+    padding: 2rem;
+    width: 70%;
+    height: 100vh;
+    border: 1px solid rgba(17, 12, 46, 0.15);
+    margin: 0 auto;
+    justify-content: flex-start;
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
+  }
+
+  .question-img {
+    width: 400px;
+    height: 300px
+  }
 }

@@ -29,8 +29,8 @@ const ProgressPie = () => {
       {
         label: '# of Votes',
         data: pieData,
-        backgroundColor: ['rgba(99,107,255,0.2)', 'rgba(235,54,75,0.2)', 'rgba(92,255,86,0.2)'],
-        borderColor: ['rgb(99,102,255)', 'rgb(235,54,69)', 'rgb(92,255,86)'],
+        backgroundColor: ['rgba(255,176,0,0.2)', 'rgba(235,54,75,0.2)', 'rgba(92,255,86,0.2)'],
+        borderColor: ['rgb(255,176,0)', 'rgb(235,54,69)', 'rgb(92,255,86)'],
         borderWidth: 1,
       },
     ],
@@ -38,10 +38,10 @@ const ProgressPie = () => {
   };
 
   return (
-    <>
-      <div>ההתקדמות שלי: </div>
+    <div className="pie-chart-container">
+      <div className="pie-title">ההתקדמות שלי: </div>
       <div className="pie-chart">{pieData ? <Pie data={data} /> : <div>loading</div>}</div>
-    </>
+    </div>
   );
 };
 
