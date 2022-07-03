@@ -7,7 +7,7 @@
   align-items: center;
   justify-content: space-around;
   height: 8vh;
-  background: rgb(0, 0, 0);
+  background: var(--blue);
   direction: ltr;
 }
 
@@ -15,6 +15,7 @@
   display: flex;
   align-items: center;
   gap: 3rem;
+  list-style-type: none
 }
 
 .nav-btn {
@@ -58,7 +59,7 @@
     right: 0;
     height: 93vh;
     width: 45vw;
-    background: rgb(0, 0, 0);
+    background: var(--blue);
     flex-direction: column;
     transform: translateX(100%);
     transition: 0.4s ease-in;

@@ -30,10 +30,6 @@ const Navbar = () => {
       unProtectedRoute: true,
     },
     {
-      to: '/logout',
-      caption: 'התנתקות',
-    },
-    {
       to: '/practice',
       caption: 'לתרגול',
     },
@@ -42,7 +38,7 @@ const Navbar = () => {
       caption: 'למבחן',
     },
     {
-      to: '/',
+      to: '/settings',
       caption: 'הגדרות',
     },
   ];
