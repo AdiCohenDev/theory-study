@@ -25,7 +25,7 @@ const calculatePieData = (data: IPieData) => {
       userWrongQuestions.push(answer);
     }
   }
-  const pieData = [newQuestions, userWrongQuestions.length, userWrongQuestions.length];
+  const pieData = [newQuestions, userWrongQuestions.length, userRightQuestions.length];
 
   return pieData;
 };

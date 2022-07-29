@@ -1,6 +1,8 @@
 {
   "version": 2,
   "projects": {
+    "mobile-app": "apps/mobile-app",
+    "mobile-app-e2e": "apps/mobile-app-e2e",
     "types": "libs/types",
     "web-api": "apps/web-api",
     "web-app": "apps/web-app",
