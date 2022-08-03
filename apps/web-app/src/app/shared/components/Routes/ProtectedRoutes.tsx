@@ -7,6 +7,8 @@ import Practice from '../../../features/practice/Practice';
 import { selectIsAuth } from '../../../../stores/AuthStore';
 import Home from '../../../features/auth/components/home/Home';
 import Settings from '../../../features/settings/Settings';
+import SignIn from '../../../features/auth/components/signin/SignIn';
+import Authentication from '../../../features/auth/shared/components/Authentication';
 const ProtectedRoutes = () => {
   const isAuth = useSelector(selectIsAuth);
 
@@ -15,6 +17,7 @@ const ProtectedRoutes = () => {
       {!isAuth && (
         <>
           <Route path="login" element={<Login />} />
+          <Route path="sign-in" element={<SignIn />} />
           <Route path="*" element={<Navigate to="/login" />} />
         </>
       )}
