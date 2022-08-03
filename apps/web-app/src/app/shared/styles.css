@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap');
+
 :root {
   --success: green;
   --danger: red;
@@ -5,7 +7,7 @@
   --light-green: rgba(227, 246, 227, 0.27);
   --dark-green: #bae8bd;
   --dark:#2c698d;
-  --blue: #181d2c;
+  --blue: rgb(0, 0, 122);
 }
 
 * {
@@ -15,6 +17,10 @@
   box-sizing: border-box;
 }
 
+body {
+  background-color: rgba(176, 176, 176, 0.14);
+  font-family: 'Fredoka', sans-serif;
+}
 .container {
   margin: 0 auto;
   width: 80%;

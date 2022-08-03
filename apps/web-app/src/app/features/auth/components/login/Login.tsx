@@ -4,6 +4,7 @@ import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth';
 import { UserCredential } from '@firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
+import './Login.css';
 
 interface IConfirmationResult {
   readonly verificationId: string;
@@ -56,28 +57,38 @@ const Login = () => {
 
   if (!confirmationResult) {
     return (
-      <>
-        <div>
-          <label htmlFor="phone">phone</label>
-          <input type="text" id="phone" value={phoneNumber} onChange={handlePhoneInputChange} />
+      <div className="container">
+        <div className="login-container">
+          <div className="login-title">ברוכים הבאים!</div>
+          <div className="input-container">
+            <label htmlFor="phone">מספר טלפון: </label>
+            <input type="text" id="phone" value={phoneNumber} onChange={handlePhoneInputChange} />
+          </div>
+          <div className="login-item">
+            <button onClick={() => signInWithPhoneNumbers(phoneNumber)} className="sign-in-btn">
+              <span>הירשם</span>
+              <div id="sign-in-button"></div>
+            </button>
+          </div>
         </div>
-        <label htmlFor="nickname">nickname</label>
-        <input type="text" id="nickname" />
-        <button onClick={() => signInWithPhoneNumbers(phoneNumber)}>
-          <span>הירשם</span>
-          <div id="sign-in-button"> </div>
-        </button>
-      </>
+      </div>
     );
   }
   return (
-    <>
-      <input type="text" id="userCode" value={code} onChange={(event) => setCode(event.target.value)} />
-      <button title="Confirm Code" onClick={() => confirmCode(code)}>
-        Log in and confirm
-        <div id="sign-in-button"> </div>
-      </button>
-    </>
+    <div className="container">
+      <div className="login-container">
+        <div className="login-title">הרגע שלחנו לך קוד לנייד</div>
+        <div className="input-container">
+          <div className="code-text">מה הקוד שקיבלת?</div>
+          <input type="text" id="userCode" value={code} onChange={(event) => setCode(event.target.value)} />
+        </div>
+
+        <button title="Confirm Code" onClick={() => confirmCode(code)} className="confirm-code-btn">
+          אישור
+          <div id="sign-in-button"></div>
+        </button>
+      </div>
+    </div>
   );
 };
 

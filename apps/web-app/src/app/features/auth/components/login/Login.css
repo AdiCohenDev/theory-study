@@ -1,0 +1,92 @@
+
+input {
+  width: 80%;
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: #fff;
+  color: #525865;
+  font-family: inherit;
+  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+  font-size: 1em;
+  line-height: 1.45;
+  outline: none;
+  border: 1px solid rgba(184, 182, 182, 0.47);
+}
+
+input:focus {
+  color: #4b515d;
+  border: 1px solid #B8B6B6;
+  box-shadow: inset 1px 2px 4px rgba(0, 0, 0, 0.01), 0px 0px 8px rgba(0, 0, 0, 0.2);
+}
+
+label, .code-text {
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: #020202;
+  margin: 22px 0 8px 0
+}
+
+.sign-in-btn, .confirm-code-btn {
+  font-size: 16px;
+  padding: 10px 2px;
+  background-color: var(--blue);
+  color: #ffffff;
+  border: none;
+  width: 80%;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.sign-in-btn span {
+  width: 30%;
+}
+.login-container {
+  text-align: center;
+  padding: 15px 0 0;
+  margin: 30px 10px;
+}
+ .login-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-container {
+  margin: 10px 5px 30px 10px;
+  font-family: inherit;
+  width: 100%;
+  border: 0;
+  font-size: 1.3rem;
+  color: black;
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.2s;
+}
+
+.login-title {
+  display: block;
+}
+
+.sign-in-button {
+  width: 0;
+  height: 0;
+}
+
+
+@media only screen and (min-width: 1000px) {
+
+  body {
+    background-color: whitesmoke;
+  }
+
+  .login-container {
+    width: 40%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+}

@@ -155,10 +155,7 @@ const Practice = () => {
       <button className="show-right-answer-btn" onClick={correctAnswerReveal}>
         הצג תשובה נכונה
       </button>
-      <div>
-        <button className="level-btn" onClick={questionLevel}>
-          {hide}
-        </button>
+      <div className="level-btns-container">
         <button className="level-btn" onClick={questionLevel}>
           {easy}
         </button>
@@ -167,6 +164,9 @@ const Practice = () => {
         </button>
         <button className="level-btn" onClick={questionLevel}>
           {hard}
+        </button>
+        <button className="level-btn" onClick={questionLevel}>
+          {hide}
         </button>
       </div>
     </div>
