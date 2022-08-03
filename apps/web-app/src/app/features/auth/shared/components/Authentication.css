@@ -47,7 +47,7 @@ label, .code-text {
   padding: 15px 0 0;
   margin: 30px 10px;
 }
- .login-item {
+.login-item {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -74,6 +74,18 @@ label, .code-text {
   height: 0;
 }
 
+
+.navigate-option {
+  display: block;
+  padding-top: 14px;
+
+}
+
+.navigate-option span {
+  color: grey;
+  text-decoration: underline;
+  cursor: pointer;
+}
 
 @media only screen and (min-width: 1000px) {
 
