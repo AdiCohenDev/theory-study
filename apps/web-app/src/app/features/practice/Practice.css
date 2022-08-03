@@ -27,6 +27,8 @@
 }
 
 .show-right-answer-btn {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 14px;
   margin: 24px;
   padding: 8px;
   background-color: var(--success);
@@ -37,6 +39,9 @@
 }
 
 .level-btn {
+
+  font-family: 'Fredoka', sans-serif;
+font-size: 14px;
   padding: 10px 15px;
   border: none;
   margin: 14px;
@@ -87,4 +92,8 @@ body {
     width: 400px;
     height: 300px
   }
+}
+
+.level-btns-container {
+  text-align: center;
 }

@@ -8,7 +8,7 @@ const LogoutButton = () => {
   };
   return (
     <>
-      <button onClick={() => logout()}>Log Out</button>
+      <button onClick={() => logout()}>התנתק</button>
     </>
   );
 };

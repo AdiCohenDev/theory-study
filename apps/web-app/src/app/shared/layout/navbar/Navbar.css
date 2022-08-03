@@ -3,6 +3,7 @@
 }
 
 .nav {
+  font-size: 18px;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -81,3 +82,5 @@
 .nav-close .line3-nav {
   transform: rotate(45deg) translate(-4px, -5px);
 }
+
+

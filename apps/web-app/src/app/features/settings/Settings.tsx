@@ -5,6 +5,7 @@ const Settings = () => {
   return (
     <div className="container">
       <Logout />
+      <button>דווח על בעיה</button>
     </div>
   );
 };
