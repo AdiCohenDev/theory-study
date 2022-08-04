@@ -7,11 +7,15 @@ export const fetchQuestionForUser = async () => {
   const allQuestions: IAllQuestions[] = await fetchAllQuestions();
   const userAnswers = await fetchUserAnswersFromDB();
   const userPracticeData: UserAnswers = userAnswers;
-
+  console.log({ allQuestions, userPracticeData, userAnswers });
   const filteredQuestionList: IUserPracticeQuestions[] = allQuestions
     .filter((question) => {
-      const expDate = userPracticeData[question.id]?.expDate;
-      const never = userPracticeData[question.id]?.never;
+      // @ts-ignore
+      const serchedQuestion = userPracticeData.find(
+        (practiceQuestion: any) => practiceQuestion.questionId === question.id.toString()
+      );
+      const expDate = serchedQuestion?.expDate;
+      const never = serchedQuestion?.never;
       if (!expDate) {
         return true;
       }
@@ -47,7 +51,7 @@ export const fetchUserAnswersFromDB = async () => {
       personId,
     },
   }).then((res) => {
-    return res.data.result.rows;
+    return res.data.result;
   });
   return response;
 };
