@@ -19,5 +19,17 @@ set never = EXCLUDED.never, expDate = EXCLUDED.expDate, isCorrect = EXCLUDED.isC
 export const getUserAnswersFromDB = async (id: any) => {
   const personId = id.personId;
   const res = await client.query(`SELECT * FROM user_answers WHERE personId = '${personId}'`);
-  return res;
+  const convertedAnswers = [];
+  for (const answer of res.rows) {
+    const convertedAnswer = {
+      personId: answer.personid,
+      questionId: answer.questionid,
+      expDate: answer.expdate,
+      answerId: answer.answerid,
+      isCorrect: answer.iscorrect,
+      never: answer.never,
+    };
+    convertedAnswers.push(convertedAnswer);
+  }
+  return convertedAnswers;
 };

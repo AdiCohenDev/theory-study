@@ -1,7 +1,7 @@
 import React from 'react';
 import Authentication from '../../shared/components/Authentication';
 
-const SignIn = () => {
+const SignUp = () => {
   return (
     <>
       <Authentication buttonText="הירשם" authTitle="הרשמה קלילה ומתחילים.." />
@@ -9,4 +9,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignUp;

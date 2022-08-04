@@ -79,7 +79,7 @@ const Authentication = ({ authTitle, buttonText, noAccount }: IProps) => {
           {noAccount ? (
             <div className="navigate-option">
               אין לך עדיין חשבון?
-              <span onClick={() => navigate('/sign-in')}>הירשם</span>
+              <span onClick={() => navigate('/sign-up')}>הירשם</span>
             </div>
           ) : (
             <div className="navigate-option">

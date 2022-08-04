@@ -5,6 +5,8 @@ import { IAnswer, IUserPracticeQuestions } from '@theory-study/types';
 import { fetchQuestionForUser, saveUserAnswersInDB } from './Questions';
 import store from '../../../stores/Store';
 import { IUserAnswer } from '@theory-study/types';
+import { GrLinkPrevious, GrLinkNext } from 'react-icons/gr';
+import { IconContext } from 'react-icons';
 
 interface ICurrentQuestion {
   question: string;
@@ -42,6 +44,9 @@ const Practice = () => {
   }, [questionNum]);
 
   const saveUserProgress = (event: IAnswer) => {
+    if (showCorrectAnswer) {
+      return;
+    }
     const answer = userAnswer || ({} as IUserAnswer);
     const answerId = event.id;
     const newUser: IUserAnswer = {
@@ -63,6 +68,7 @@ const Practice = () => {
   };
   const nextQuestion = () => {
     setUserAnswer(null);
+    setUserAnswerId(null!);
     if (questionNum < allQuestions.length - 1) {
       setQuestionNum(questionNum + 1);
     }
@@ -146,28 +152,47 @@ const Practice = () => {
       </div>
       <div className="navigate-questions">
         <span onClick={() => prevQuestion()} className="question-navigation">
-          לשאלה הקודמת
+          <GrLinkNext size={20} />
+          <span>לשאלה הקודמת</span>
         </span>
         <span onClick={() => nextQuestion()} className="question-navigation">
-          לשאלה הבאה
+          <span>לשאלה הבאה</span>
+          <GrLinkPrevious size={20} />
         </span>
       </div>
-      <button className="show-right-answer-btn" onClick={correctAnswerReveal}>
-        הצג תשובה נכונה
-      </button>
+      {!showCorrectAnswer ? (
+        <button className="show-right-answer-btn" onClick={correctAnswerReveal}>
+          הצג תשובה נכונה
+        </button>
+      ) : (
+        ''
+      )}
+
       <div className="level-btns-container">
-        <button className="level-btn" onClick={questionLevel}>
-          {easy}
-        </button>
-        <button className="level-btn" onClick={questionLevel}>
-          {middle}
-        </button>
-        <button className="level-btn" onClick={questionLevel}>
-          {hard}
-        </button>
-        <button className="level-btn" onClick={questionLevel}>
-          {hide}
-        </button>
+        <div>
+          <button className="level-btn" onClick={questionLevel}>
+            {easy}
+          </button>
+          <span>+1w</span>
+        </div>
+        <div>
+          <button className="level-btn" onClick={questionLevel}>
+            {middle}
+          </button>
+          <span>+2d</span>
+        </div>
+        <div>
+          <button className="level-btn" onClick={questionLevel}>
+            {hard}
+          </button>
+          <span>+1h</span>
+        </div>
+        <div>
+          <button className="level-btn" onClick={questionLevel}>
+            {hide}
+          </button>
+          <span>0</span>
+        </div>
       </div>
     </div>
   );

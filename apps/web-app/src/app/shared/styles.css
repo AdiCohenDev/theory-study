@@ -2,7 +2,7 @@
 
 :root {
   --success: green;
-  --danger: red;
+  --danger: rgba(255, 36, 36, 0.76);
   --orange: #ffb000;
   --light-green: rgba(227, 246, 227, 0.27);
   --dark-green: #bae8bd;

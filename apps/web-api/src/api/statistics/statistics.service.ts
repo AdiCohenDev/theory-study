@@ -9,7 +9,7 @@ interface IPieData {
 export const getUserProgressData = async (id: any) => {
   const allQuestions = await getQuestionsAPI();
   const allUserAnswers = await getUserAnswersFromDB(id);
-  const data = { allQuestions: allQuestions, allUserAnswers: allUserAnswers.rows };
+  const data = { allQuestions: allQuestions, allUserAnswers: allUserAnswers };
   const pieData = calculatePieData(data);
   return pieData;
 };
