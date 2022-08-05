@@ -1,11 +1,12 @@
 .pie-chart {
-  width: 80%;
+  width: 85%;
   margin: 20px auto;
 }
 
 .pie-title {
+  width: 85%;
   font-size: 22px;
-  margin: 20px;
+  margin: 10px auto;
 }
 
 @media only screen and (min-width: 1000px) {

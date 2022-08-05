@@ -45,13 +45,12 @@
 .level-btns-container {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: baseline;
   flex-wrap: wrap;
 }
 
 .level-btns-container div {
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   flex-direction: column;

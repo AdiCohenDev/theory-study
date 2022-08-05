@@ -43,7 +43,7 @@ const ProgressPie = () => {
         labels: {
           // This more specific font property overrides the global property
           font: {
-            size: 14,
+            size: 16,
             family: "'Fredoka', 'sans-serif'",
             lineHeight: 1.2,
           },
@@ -54,7 +54,7 @@ const ProgressPie = () => {
 
   return (
     <div className="pie-chart-container">
-      <div className="pie-title">ההתקדמות שלי: </div>
+      <div className="pie-title">ההתקדמות שלי בתרגול: </div>
       <div className="pie-chart">{pieData ? <Pie data={data} options={options} /> : <div>loading</div>}</div>
     </div>
   );

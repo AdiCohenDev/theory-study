@@ -191,7 +191,6 @@ const Practice = () => {
           <button className="level-btn" onClick={questionLevel}>
             {hide}
           </button>
-          <span>0</span>
         </div>
       </div>
     </div>

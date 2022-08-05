@@ -1,0 +1,43 @@
+.home-container {
+ display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.home-container div {
+  width: 85%;
+}
+
+.home-container div button {
+  width: 100%;
+  padding: 30px 10px;
+  border-radius: 16px;
+  background-color: var(--blue);
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  border: none;
+  box-shadow: rgba(99, 99, 99, 0.25) 0px 2px 8px 0px;  margin: 1rem 0 1.4rem 0;
+  font-family: inherit;
+}
+
+.home-container div button:hover {
+  background-color: #000069;
+  box-shadow: rgba(99, 99, 99, 0.25) 0px 4px 10px 0px;}
+
+.home-container div button:active {
+  background-color: #000069;
+
+}
+.home-title {
+  font-size: 26px;
+  width: 100%;
+  margin: 20px 0;
+}
+
+.home-practice-title {
+  font-size: 22px;
+  margin-bottom: -10px;
+}
