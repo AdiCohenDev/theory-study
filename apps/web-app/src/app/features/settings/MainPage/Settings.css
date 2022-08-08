@@ -1,0 +1,32 @@
+.setting-item {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 85%;
+}
+
+.item-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0.4rem 0.6rem 0.4rem;
+  cursor: pointer;
+}
+
+.item-container span {
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: black;
+}
+
+.line {
+  border-top: 2px solid black;
+  opacity: 0.6;
+}
+
+.title {
+  font-size: 1.6rem;
+  font-weight: normal;
+  margin: 20px auto;
+  text-align: center;
+}

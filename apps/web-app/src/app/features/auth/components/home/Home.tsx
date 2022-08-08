@@ -8,19 +8,21 @@ const Home = () => {
 
   return (
     <>
-      <div className="home-container">
-        <div className="home-title">בואו נלמד לתיאוריה</div>
-        <div>
-          <div className="home-practice-title">שנתרגל?</div>
-          <button onClick={() => navigate('/practice')}>לתרגול השאלות</button>
+      <div className="container">
+        <div className="home-container">
+          <div className="home-title">בואו נלמד לתיאוריה</div>
+          <div>
+            <div className="home-practice-title">שנתרגל?</div>
+            <button onClick={() => navigate('/practice')}>לתרגול השאלות</button>
+          </div>
+          {/*<div>*/}
+          {/*  <div>שננסה להיבחן?</div>*/}
+          {/*  <button>קח אותי למבחן!</button>*/}
+          {/*</div>*/}
         </div>
-        {/*<div>*/}
-        {/*  <div>שננסה להיבחן?</div>*/}
-        {/*  <button>קח אותי למבחן!</button>*/}
-        {/*</div>*/}
+        <hr />
+        <ProgressPie />
       </div>
-      <hr />
-      <ProgressPie />
     </>
   );
 };

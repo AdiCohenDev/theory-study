@@ -8,7 +8,7 @@
 }
 
 .right-answer {
-   background-color: var(--success);
+  background-color: var(--success);
   color: white;
 }
 
