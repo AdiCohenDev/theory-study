@@ -130,7 +130,7 @@ const Practice = () => {
     nextQuestion();
   };
   return (
-    <div className="practice-container">
+    <div className="container practice-container">
       <div className="question">{currentQuestion?.question}</div>
       {currentQuestion?.img ? (
         <img src={currentQuestion.img} className="question-img" alt={currentQuestion.category} />

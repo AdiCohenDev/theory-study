@@ -1,4 +1,3 @@
-
 .practice-container {
   display: flex;
   flex-direction: column;
@@ -8,7 +7,7 @@
 
 .question {
   margin: 10px;
-  font-size: 24px;
+  font-size: 1.4rem;
   width: 90%;
 }
 
@@ -17,6 +16,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-size: 1rem;
 }
 
 .navigate-questions {
@@ -32,9 +32,9 @@
 
 .show-right-answer-btn {
   font-family: 'Fredoka', sans-serif;
-  font-size: 14px;
+  font-size: 1rem;
   margin: 24px;
-  padding: 8px;
+  padding: 10px;
   background-color: var(--success);
   border: none;
   border-radius: 8px;
@@ -58,7 +58,7 @@
 }
 
 .level-btns-container div span {
-  font-size: 14px;
+  font-size: 0.8rem;
   color:#4b515d;
 }
 
@@ -67,24 +67,10 @@
   font-size: 14px;
   padding: 10px 15px;
   border: none;
-
   border-radius: 10px;
   cursor: pointer;
   color: whitesmoke;
   background-color: var(--blue);
-}
-
-.finish-practice-btn {
-  width: 90%;
-  padding: 12px;
-  font-size: 16px;
-  border: none;
-  border-radius: 10px;
-  color: whitesmoke;
-  background-color: #262626;
-  margin: 26px;
-  position: absolute;
-  bottom: 0;
 }
 
 .question-navigation {
@@ -101,21 +87,11 @@
 }
 
 @media only screen and (min-width: 1000px) {
-
-  body {
-    background-color: whitesmoke;
-  }
-
   .practice-container {
-    padding: 2rem;
-    width: 70%;
-    height: 100vh;
-    border: 1px solid rgba(17, 12, 46, 0.15);
-    margin: 0 auto;
     justify-content: flex-start;
-    background-color: rgb(255, 255, 255);
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
+    margin: 0 auto;
   }
+
 
   .question-img {
     width: 400px;

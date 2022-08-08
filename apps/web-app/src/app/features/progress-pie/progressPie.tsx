@@ -53,10 +53,10 @@ const ProgressPie = () => {
   };
 
   return (
-    <div className="pie-chart-container">
+    <>
       <div className="pie-title">ההתקדמות שלי בתרגול: </div>
       <div className="pie-chart">{pieData ? <Pie data={data} options={options} /> : <div>loading</div>}</div>
-    </div>
+    </>
   );
 };
 

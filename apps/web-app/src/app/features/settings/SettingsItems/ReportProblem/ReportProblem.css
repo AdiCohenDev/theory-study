@@ -1,0 +1,41 @@
+.report-problem-container {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.report-title {
+  font-weight: normal;
+  margin: 10px 0;
+}
+
+.report-problem-container textarea {
+  margin: 10px 0;
+  padding: 12px 14px;
+  border-radius: 8px;
+  background: #fff;
+  color: #525865;
+  font-family: inherit;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 2px 12px;
+  font-size: 1.2rem;
+  line-height: 1.45;
+  outline: none;
+  border: 1px solid rgba(184, 182, 182, 0.47);
+}
+
+textarea:focus {
+  border-radius: 12px;
+  color: #4b515d;
+  border: 1px solid #c9c9c9;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 12px;}
+
+.report-problem-container .send-problem-btn {
+  padding: 10px 20px;
+  background-color: var(--success);
+  color: whitesmoke;
+  font-family: inherit;
+  font-size: 1rem;
+  border-radius: 10px;
+  border: none;
+}

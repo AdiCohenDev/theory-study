@@ -8,7 +8,7 @@ import { selectIsAuthLoading, setUser } from '../stores/AuthStore';
 import Auth from './shared/firebase/Auth';
 import { User } from './features/auth/shared/models/User';
 import ProtectedRoutes from './shared/components/Routes/ProtectedRoutes';
-import ProgressPie from '../../src/app/features/progress-pie/progressPie';
+
 export function App() {
   const dispatch = useDispatch();
   const isAuthLoading = useSelector(selectIsAuthLoading);
@@ -23,7 +23,6 @@ export function App() {
   return (
     <>
       <Navbar />
-
       {isAuthLoading === false && <ProtectedRoutes />}
       <Outlet />
     </>

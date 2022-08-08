@@ -5,27 +5,16 @@
 
 .pie-title {
   width: 85%;
-  font-size: 22px;
+  font-size: 1.25rem;
   margin: 10px auto;
 }
 
 @media only screen and (min-width: 1000px) {
-
-  .pie-chart-container {
-    width: 70%;
-    height: 100vh;
-    border: 1px solid rgba(17, 12, 46, 0.15);
-    margin: 0 auto;
-    background-color: rgb(255, 255, 255);
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
-  }
-
   .pie-chart {
     width: 56%;
   }
 
   .pie-title {
-    font-size: 22px;
     margin: 30px 80px;
   }
 }

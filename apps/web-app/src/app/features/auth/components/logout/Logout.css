@@ -1,0 +1,23 @@
+.logout-container {
+ width: 85%;
+  margin: 4% auto;
+}
+
+.logout-btn {
+  background-color: var(--blue);
+  color: whitesmoke;
+  width: 30%;
+  justify-content: center;
+  display: flex;
+  padding: 10px 30px;
+  border: none;
+  border-radius: 10px;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+@media only screen and (min-width: 1000px) {
+  .logout-btn {
+    margin: 0 auto;
+  }
+}
