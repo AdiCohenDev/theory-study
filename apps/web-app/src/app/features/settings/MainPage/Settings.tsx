@@ -3,6 +3,7 @@ import Logout from '../../auth/components/logout/Logout';
 import './Settings.css';
 import { GrLinkPrevious } from 'react-icons/gr';
 import { useNavigate } from 'react-router-dom';
+import HomeButton from '../../../shared/components/home-button/HomeButton';
 
 const Settings = () => {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ const Settings = () => {
         <span className="line"></span>
       </div>
       <Logout />
+      <HomeButton />
     </div>
   );
 };

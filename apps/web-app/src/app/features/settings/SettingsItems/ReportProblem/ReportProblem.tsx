@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './ReportProblem.css';
+import HomeButton from '../../../../shared/components/home-button/HomeButton';
 
 const ReportProblem = () => {
   const [userProblem, setUserProblem] = useState('');
@@ -26,6 +27,7 @@ const ReportProblem = () => {
           שלח
         </button>
       </div>
+      <HomeButton />
     </div>
   );
 };
