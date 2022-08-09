@@ -20,6 +20,7 @@ const Home = () => {
           {/*  <button>קח אותי למבחן!</button>*/}
           {/*</div>*/}
         </div>
+
         <hr />
         <ProgressPie />
       </div>

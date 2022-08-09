@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import AnswerBox from '../../shared/components/AnswerBox/AnswerBox';
+import AnswerBox from '../../shared/components/answer-box/AnswerBox';
 import './Practice.css';
 import { IAnswer, IUserPracticeQuestions } from '@theory-study/types';
 import { fetchQuestionForUser, saveUserAnswersInDB } from './Questions';
@@ -7,6 +7,7 @@ import store from '../../../stores/Store';
 import { IUserAnswer } from '@theory-study/types';
 import { GrLinkPrevious, GrLinkNext } from 'react-icons/gr';
 import { IconContext } from 'react-icons';
+import HomeButton from '../../shared/components/home-button/HomeButton';
 
 interface ICurrentQuestion {
   question: string;
@@ -193,6 +194,7 @@ const Practice = () => {
           </button>
         </div>
       </div>
+      <HomeButton />
     </div>
   );
 };

@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectIsAuthLoading, setUser } from '../stores/AuthStore';
 import Auth from './shared/firebase/Auth';
 import { User } from './features/auth/shared/models/User';
-import ProtectedRoutes from './shared/components/Routes/ProtectedRoutes';
+import ProtectedRoutes from './shared/components/routes/ProtectedRoutes';
 
 export function App() {
   const dispatch = useDispatch();
