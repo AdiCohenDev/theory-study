@@ -1,9 +1,13 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { SafeAreaView, StatusBar } from 'react-native';
 import { WebView } from 'react-native-webview';
+import SplashScreen from 'react-native-splash-screen';
 
 export const App = () => {
+  useEffect(() => {
+    SplashScreen.hide();
+  }, []);
   const url = __DEV__ ? 'http://localhost:4200' : '';
   return (
     <>
