@@ -28,7 +28,8 @@ textarea:focus {
   border-radius: 12px;
   color: #4b515d;
   border: 1px solid #c9c9c9;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 12px;}
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 12px;
+}
 
 .report-problem-container .send-problem-btn {
   padding: 10px 20px;
@@ -38,4 +39,30 @@ textarea:focus {
   font-size: 1rem;
   border-radius: 10px;
   border: none;
+  font-weight: normal;
+  margin-top: 1rem;
+}
+
+form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+@media only screen and (min-width: 1000px) {
+  form {
+    width: 80%;
+    margin: 0 auto
+  }
+
+  .report-title {
+    text-align: center;
+  }
+}
+
+.user-phone-input {
+  visibility: hidden;
+  width: 0;
+  height: 0;
 }

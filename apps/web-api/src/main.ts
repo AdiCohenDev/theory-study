@@ -4,7 +4,6 @@ import userRoutes from './api/user/user.routes';
 import questionsRoutes from './api/questions/all-questions/theory-questions.routes';
 import userProgressRoutes from './api/questions/user-answers/user-answers.routes';
 import statisticsRoutes from './api/statistics/statistics.routes';
-
 const app = express();
 app.use(express.json());
 app.use(
