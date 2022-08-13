@@ -6,6 +6,7 @@
     "start": "nx serve",
     "start:web-api": "nx serve web-api",
     "build": "nx build",
+    "build:web-app": "npm run build web-app --prod",
     "test": "nx test"
   },
   "private": true,
