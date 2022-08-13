@@ -8,7 +8,7 @@ export const App = () => {
   useEffect(() => {
     SplashScreen.hide();
   }, []);
-  const url = __DEV__ ? 'http://localhost:4200' : '';
+  const url = __DEV__ ? 'http://localhost:4200' : 'https://theory-study.vercel.app/login';
   return (
     <>
       <StatusBar barStyle="dark-content" />
