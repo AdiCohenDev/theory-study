@@ -1,29 +1,31 @@
-import React, { useRef, useState } from 'react';
+import React, { ChangeEvent, MouseEvent, FormEvent, useRef, useState } from 'react';
 import './ReportProblem.css';
-// @ts-ignore
-import emailjs from '@emailjs/browser';
 import store from '../../../../../stores/Store';
+import { EmailJSResponseStatus } from '@emailjs/browser/es/models/EmailJSResponseStatus';
+import { sendEmail } from '../email.service';
 
 const ReportProblem = () => {
   const [userProblem, setUserProblem] = useState('');
   const [message, setMessage] = useState('');
-  const form: any = useRef();
+  const form = useRef<null | HTMLFormElement>(null);
 
-  const sendUserProblem = async (e: any) => {
+  const sendUserProblem = async (e: MouseEvent<HTMLButtonElement> | FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    emailjs.sendForm('service_uif8xef', 'template_19pli5i', form.current, 'u6-3LEVQRHWt7qLvU').then(
-      (result: any) => {
-        setMessage('הודעתך נשלחה בהצלחה.');
-        setUserProblem('');
-      },
-      (error: any) => {
-        setMessage('אירעה בעיה אנא נסה שנית.');
-      }
-    );
+    if (form.current) {
+      sendEmail(form.current).then(
+        (result: EmailJSResponseStatus) => {
+          setMessage('הודעתך נשלחה בהצלחה.');
+          setUserProblem('');
+        },
+        (error) => {
+          setMessage('אירעה בעיה אנא נסה שנית.');
+        }
+      );
+    }
   };
 
-  const handleMessageChange = (event: any): void => {
-    console.log(event);
+  const handleMessageChange = (event: ChangeEvent<HTMLTextAreaElement>): void => {
+    event.preventDefault();
     setUserProblem(event.target.value);
   };
 
