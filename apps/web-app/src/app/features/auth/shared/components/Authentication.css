@@ -92,11 +92,30 @@ label, .code-text {
 
 @media only screen and (min-width: 1000px) {
   .login-container {
-    width: 40%;
+    width: 60%;
     margin: 0 auto;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+  }
+
+  .sign-in-btn {
+    font-size: 1.2rem;
+    padding: 12px 30px;
+    background-color: var(--blue);
+    color: #ffffff;
+    border: none;
+    width: 100%;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  .confirm-code-btn {
+    width: 40%;
+  }
+
+  .login-title {
+    font-size: 1.4rem;
   }
 }
