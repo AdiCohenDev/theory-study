@@ -30,6 +30,7 @@ label, .code-text {
 }
 
 .sign-in-btn, .confirm-code-btn {
+  margin-top: 30px;
   font-size: 16px;
   padding: 10px 2px;
   background-color: var(--blue);
@@ -57,7 +58,7 @@ label, .code-text {
 }
 
 .input-container {
-  margin: 10px 5px 30px 10px;
+  margin: 10px 5px 10px 10px;
   font-family: inherit;
   width: 100%;
   border: 0;
@@ -87,6 +88,17 @@ label, .code-text {
 .navigate-option span {
   color: grey;
   text-decoration: underline;
+  cursor: pointer;
+}
+
+.message {
+  color: var(--danger)
+}
+
+.message span {
+  color: black;
+  text-decoration: underline;
+  margin-right: 5px;
   cursor: pointer;
 }
 
