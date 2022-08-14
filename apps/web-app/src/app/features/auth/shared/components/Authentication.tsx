@@ -1,10 +1,12 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, SetStateAction, useEffect, useState } from 'react';
 import Auth from '../../../../shared/firebase/Auth';
 import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth';
 import { UserCredential } from '@firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 import './Authentication.css';
+import { errorMappings } from './AuthErrors';
+import firebase from 'firebase/compat';
 
 interface IConfirmationResult {
   readonly verificationId: string;
@@ -20,11 +22,20 @@ interface IProps {
 const Authentication = ({ authTitle, buttonText, noAccount }: IProps) => {
   const [confirmationResult, setConfirmationResult] = useState<IConfirmationResult>(null!);
   const [phoneNumber, setPhoneNumber] = useState<string>('');
+  const [completePhoneNumber, setCompletePhoneNumber] = useState<string>('');
   const [code, setCode] = useState<string>('');
-
+  const [message, setMessage] = useState<string>('');
+  const [pageRefresh, setPageRefresh] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  const signInWithPhoneNumbers = async (phone: any) => {
+  useEffect(() => {
+    if (pageRefresh) {
+      window.location.reload();
+    }
+    setPageRefresh(false);
+  }, [pageRefresh]);
+
+  const signInWithPhoneNumbers = async (phone: string) => {
     const appVerifier = new RecaptchaVerifier(
       'sign-in-button',
       {
@@ -39,27 +50,55 @@ const Authentication = ({ authTitle, buttonText, noAccount }: IProps) => {
     const localPhoneNum = phone.slice(numOfLastDigits);
     const countryPrefix = '+972';
     const completePhoneNum = countryPrefix + localPhoneNum;
-
-    const confirmation = await signInWithPhoneNumber(Auth, completePhoneNum, appVerifier);
-    await addUserToDB(completePhoneNum);
-    setConfirmationResult(confirmation);
+    setCompletePhoneNumber(completePhoneNum);
+    const confirmation = await signInWithPhoneNumber(Auth, completePhoneNum, appVerifier)
+      .then((confirmationResult) => {
+        console.log(confirmationResult);
+        return confirmationResult;
+      })
+      .catch((error): void => {
+        if (error?.code) {
+          setMessage(errorMappings[error.code]);
+          return;
+        }
+        setMessage('אירעה שגיאה. רענן ונסה שנית.');
+        return;
+      });
+    console.log(confirmation);
+    if (confirmation) {
+      setConfirmationResult(confirmation);
+    }
   };
 
   async function confirmCode(code: string) {
-    await confirmationResult.confirm(code);
-    navigate('/');
+    await confirmationResult
+      .confirm(code)
+      .then(async (result) => {
+        await addUserToDB(completePhoneNumber);
+        // User signed in successfully.
+        navigate('/');
+      })
+      .catch((error) => {
+        if (error?.code) {
+          setMessage(errorMappings[error.code]);
+        }
+      });
   }
 
   const addUserToDB = async (userPhone: string) => {
     const response = await Axios.post('http://localhost:3000/user', {
       phone: userPhone,
     }).then((res) => console.log(res.data));
+    return response;
   };
 
   const handlePhoneInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setPhoneNumber(event.target.value);
   };
 
+  const refreshPage = () => {
+    setPageRefresh(true);
+  };
   if (!confirmationResult) {
     return (
       <div className="container">
@@ -69,6 +108,14 @@ const Authentication = ({ authTitle, buttonText, noAccount }: IProps) => {
             <label htmlFor="phone">מספר טלפון: </label>
             <input type="text" id="phone" value={phoneNumber} onChange={handlePhoneInputChange} />
           </div>
+          {message ? (
+            <div className="message">
+              {message}
+              <span onClick={refreshPage}>רענן</span>
+            </div>
+          ) : (
+            ''
+          )}
           <div className="login-item">
             <button onClick={() => signInWithPhoneNumbers(phoneNumber)} className="sign-in-btn">
               <span>{buttonText}</span>
@@ -98,6 +145,7 @@ const Authentication = ({ authTitle, buttonText, noAccount }: IProps) => {
           <div className="code-text">מה הקוד שקיבלת?</div>
           <input type="text" id="userCode" value={code} onChange={(event) => setCode(event.target.value)} />
         </div>
+        {message ? <div className="message">{message}</div> : ''}
 
         <button title="Confirm Code" onClick={() => confirmCode(code)} className="confirm-code-btn">
           אישור
