@@ -89,6 +89,7 @@ label, .code-text {
   color: grey;
   text-decoration: underline;
   cursor: pointer;
+  margin-right: 2px;
 }
 
 .message {
