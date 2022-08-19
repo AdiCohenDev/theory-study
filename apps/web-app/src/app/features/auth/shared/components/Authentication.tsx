@@ -150,6 +150,7 @@ const Authentication = ({ authTitle, buttonText, noAccount }: IProps) => {
         <button title="Confirm Code" onClick={() => confirmCode(code)} className="confirm-code-btn">
           אישור
           <div id="sign-in-button"></div>
+          <></>
         </button>
       </div>
     </div>
