@@ -7,7 +7,7 @@ export const fetchQuestionForUser = async () => {
   const allQuestions: IAllQuestions[] = await fetchAllQuestions();
   const userAnswers = await fetchUserAnswersFromDB();
   const userPracticeData: UserAnswers = userAnswers;
-  console.log({ allQuestions, userPracticeData, userAnswers });
+
   const filteredQuestionList: IUserPracticeQuestions[] = allQuestions
     .filter((question) => {
       // @ts-ignore
@@ -38,15 +38,23 @@ export const fetchQuestionForUser = async () => {
 };
 
 export const fetchAllQuestions = async () => {
-  const response = await Axios.get('http://localhost:3000/questions').then((res) => {
+  const url = getAPIURL();
+  /*
+    1. Add new api service, with a function called getAPIURL
+    2. Change existing APIs to work like this `${getAPIURL()/qustions}`
+   */
+
+  const response = await Axios.get(`${url}/questions`).then((res) => {
     return res.data.questions;
   });
   return response;
 };
 
 export const fetchUserAnswersFromDB = async () => {
+  const url = getAPIURL();
+
   const personId = store.getState().auth.user.uid;
-  const response = await Axios.get('http://localhost:3000/user-answers', {
+  const response = await Axios.get(`${url}/user-answers`, {
     params: {
       personId,
     },
@@ -57,6 +65,15 @@ export const fetchUserAnswersFromDB = async () => {
 };
 
 export const saveUserAnswersInDB = async (userData: IUserAnswer) => {
-  const response = await Axios.post('http://localhost:3000/user-answers', userData);
+  const url = getAPIURL();
+  const response = await Axios.post(`${url}/user-answers`, userData);
   return response;
+};
+
+export const getAPIURL = () => {
+  if (process.env['NODE_ENV'] === 'development') {
+    return 'http://localhost:3000';
+  } else {
+    return 'http://ec2-15-184-54-55.me-south-1.compute.amazonaws.com:3000';
+  }
 };

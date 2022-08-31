@@ -7,6 +7,7 @@ import Axios from 'axios';
 import './Authentication.css';
 import { errorMappings } from './AuthErrors';
 import firebase from 'firebase/compat';
+import { getAPIURL } from '../../../practice/Questions';
 
 interface IConfirmationResult {
   readonly verificationId: string;
@@ -86,7 +87,8 @@ const Authentication = ({ authTitle, buttonText, noAccount }: IProps) => {
   }
 
   const addUserToDB = async (userPhone: string) => {
-    const response = await Axios.post('http://localhost:3000/user', {
+    const url = getAPIURL();
+    const response = await Axios.post(`${url}/user`, {
       phone: userPhone,
     }).then((res) => console.log(res.data));
     return response;
