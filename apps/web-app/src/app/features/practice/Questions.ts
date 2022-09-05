@@ -74,6 +74,6 @@ export const getAPIURL = () => {
   if (process.env['NODE_ENV'] === 'development') {
     return 'http://localhost:3000';
   } else {
-    return 'http://ec2-15-184-54-55.me-south-1.compute.amazonaws.com:3000';
+    return 'https://smart-theory.me';
   }
 };
