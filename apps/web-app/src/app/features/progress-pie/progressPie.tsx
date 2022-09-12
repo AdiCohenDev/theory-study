@@ -10,12 +10,11 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 Chart.register(ChartDataLabels);
 
 const ProgressPie = () => {
-  const [pieData, setPieData] = useState<[]>(null!);
+  const [pieData, setPieData] = useState<[number, number, number]>(null!);
 
   useEffect(() => {
     getUserPieData()
       .then((results) => {
-        console.log(results);
         setPieData(results);
       })
       .catch((err) => {

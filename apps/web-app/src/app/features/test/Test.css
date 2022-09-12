@@ -1,0 +1,33 @@
+.finish-test-btn {
+  margin: 20px;
+  background-color: var(--success);
+  color: whitesmoke;
+  font-size: 1rem;
+  font-family: inherit;
+  padding: 16px 30px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.question-number {
+  margin-left: 1rem;
+  align-self: flex-end;
+  font-size: 1.2rem;
+  border: 1px solid var(--success);
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.timer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0.8rem
+}
+
+.timer span {
+  font-size: 0.9rem;
+}

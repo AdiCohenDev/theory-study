@@ -31,5 +31,5 @@ Phone - 0523333333
 <br>
 Code - 123456
 
-<img src="assets/practice.png">
+
 

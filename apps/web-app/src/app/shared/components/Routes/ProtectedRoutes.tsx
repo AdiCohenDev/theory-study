@@ -10,6 +10,7 @@ import Settings from '../../../features/settings/MainPage/Settings';
 import SignUp from '../../../features/auth/components/signin/SignUp';
 import Authentication from '../../../features/auth/shared/components/Authentication';
 import ReportProblem from '../../../features/settings/SettingsItems/ReportProblem/ReportProblem';
+import Test from '../../../features/test/Test';
 const ProtectedRoutes = () => {
   const isAuth = useSelector(selectIsAuth);
 
@@ -25,6 +26,7 @@ const ProtectedRoutes = () => {
       {isAuth && (
         <>
           <Route path="practice" element={<Practice />} />
+          <Route path="test" element={<Test />} />
           <Route path="settings" element={<Settings />} />
           <Route path="report-problem" element={<ReportProblem />} />
           <Route path="/" element={<Home />} />
