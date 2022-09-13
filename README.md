@@ -1,7 +1,7 @@
 <h1 align="center">
 
   Smart Theory
-<hr>
+
 
   <img src="assets/logo.png" width="200" height="200">
   <br>
@@ -18,8 +18,9 @@
 * Exam simulator - practice for a theory exam
 <br>
 <br>
-##**Demo**
-<hr>
+
+<h2>Demo</h2>
+
 
 **Demo Link: Visit [Theory Study](https://theory-study.vercel.app/).**
 
@@ -31,8 +32,7 @@ Phone - 0523333333
 Code - 123456
 
 
-##**Technology Stack**
-<hr>
+<h2>Technology Stack</h2>
 
 Built with:
 * React (TypeScript) in NX workspace, Redux, ChartJS, Firebase Auth
