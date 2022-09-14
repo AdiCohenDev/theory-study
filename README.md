@@ -1,35 +1,44 @@
 <h1 align="center">
-  <br>
-  <br>
+
   Smart Theory
+
+
+  <img src="assets/logo.png" width="200" height="200">
   <br>
 </h1>
 
 <hr>
-<p style="text-align: center; font-weight: bold;">Smart and effective way of learning for the theory exam.
+<p style="text-align: center; font-weight: bold;">Smart and effective way of learning for the theory exam
 </p>
 <hr>
 <br>
 
-The app lets the user choose the level of the question and accordingly make the practice questions fit for the user level.
-
-Also, the user has a pie chart that shows him the progress of the questions.
+* Answer questions based difficulty using spaced repetition, with harder questions appearing more and easy questions filtered out
+* Track progress and achieve mastery - the app lets you visualize all your progress, so you can know exactly how many questions you've practiced successfully
+* Exam simulator - practice for a theory exam
 <br>
 <br>
-##**Technology Stack**
 
-
-**build with React, Redux, Node.js, AWS EC2, AWS Route 53, AWS ALB, Firebase Authentication**
+<h2>Demo</h2>
 
 
 **Demo Link: Visit [Theory Study](https://theory-study.vercel.app/).**
 
+<img src="assets/app.png" >
 
-Demo User:
-<br>
+### Demo User:
 Phone - 0523333333
 <br>
 Code - 123456
+
+
+<h2>Technology Stack</h2>
+
+Built with:
+* React (TypeScript) in NX workspace, Redux, ChartJS, Firebase Auth
+* Node.js (TypeScript)
+* AWS (EC2, Route 53, ALB)
+
 
 
 
