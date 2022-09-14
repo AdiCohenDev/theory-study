@@ -6,7 +6,6 @@ import { fetchQuestionForUser, saveUserAnswersInDB } from './Questions';
 import store from '../../../stores/Store';
 import { IUserAnswer } from '@theory-study/types';
 import { GrLinkPrevious, GrLinkNext } from 'react-icons/gr';
-import { IconContext } from 'react-icons';
 
 interface ICurrentQuestion {
   question: string;
@@ -130,7 +129,7 @@ const Practice = () => {
     nextQuestion();
   };
   return (
-    <div className="container practice-container">
+    <div className="section-container">
       <div className="question">{currentQuestion?.question}</div>
       {currentQuestion?.img ? (
         <img src={currentQuestion.img} className="question-img" alt={currentQuestion.category} />

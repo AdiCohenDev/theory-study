@@ -23,8 +23,10 @@ export function App() {
   return (
     <>
       <Navbar />
-      {isAuthLoading === false && <ProtectedRoutes />}
-      <Outlet />
+      <div className="container-all">
+        {isAuthLoading === false && <ProtectedRoutes />}
+        <Outlet />
+      </div>
     </>
   );
 }

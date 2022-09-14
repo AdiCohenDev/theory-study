@@ -4,7 +4,6 @@ import { IUserAnswer } from '@theory-study/types';
 export const saveUserAnswersInDB = async (userProgress: IUserAnswer) => {
   const values = Object.values(userProgress);
   const params = Object.keys(userProgress).map((_, index) => `$${index + 1}`);
-  console.log({ values: values, nums: params });
 
   const res = await client.query(
     `INSERT INTO user_answers (answerId, never, questionId, expDate, personId, isCorrect)

@@ -1,8 +1,7 @@
-.practice-container {
+.section-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
 }
 
 .question {
@@ -42,11 +41,12 @@
   cursor: pointer;
 }
 
-.level-btns-container {
+.level-btns-container, .options-btns {
   display: flex;
   justify-content: center;
   align-items: baseline;
   flex-wrap: wrap;
+  text-align: center;
 }
 
 .level-btns-container div {
@@ -87,9 +87,8 @@
 }
 
 @media only screen and (min-width: 1000px) {
-  .practice-container {
+  .section-container {
     justify-content: flex-start;
-    margin: 0 auto;
   }
 
 
@@ -101,8 +100,4 @@
   .question-navigation span {
     visibility: visible;
   }
-}
-
-.level-btns-container {
-  text-align: center;
 }

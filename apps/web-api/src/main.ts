@@ -9,7 +9,7 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: 'https://theory-study.vercel.app',
+    origin: process.env['NODE_ENV'] === 'development' ? 'http://localhost:4200' : 'https://theory-study.vercel.app',
   })
 );
 

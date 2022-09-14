@@ -34,7 +34,7 @@ const Navbar = () => {
       caption: 'לתרגול',
     },
     {
-      to: '/',
+      to: '/test',
       caption: 'למבחן',
     },
     {
@@ -57,9 +57,9 @@ const Navbar = () => {
               }
               return false;
             })
-            .map((navItem) => {
+            .map((navItem, index) => {
               return (
-                <li className="nav-item">
+                <li className="nav-item" key={index}>
                   <Link to={navItem.to} style={linkStyle} onClick={onLinkClickCloseNav}>
                     {navItem.caption}
                   </Link>
