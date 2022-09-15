@@ -5,11 +5,17 @@ import questionsRoutes from './api/questions/all-questions/theory-questions.rout
 import userProgressRoutes from './api/questions/user-answers/user-answers.routes';
 import statisticsRoutes from './api/statistics/statistics.routes';
 import healthRoutes from './api/health/health.routes';
+
+const url = process.env['NODE_ENV'] === 'development' ? 'http://localhost:4200' : 'https://theory-study.vercel.app';
+console.log({
+  corlsUrl: url,
+  env: process.env['NODE_ENV'],
+});
 const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: process.env['NODE_ENV'] === 'development' ? 'http://localhost:4200' : 'https://theory-study.vercel.app',
+    origin: url,
   })
 );
 
