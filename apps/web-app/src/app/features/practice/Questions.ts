@@ -36,7 +36,7 @@ export const fetchQuestionForUser = async () => {
       }
       return -1;
     });
-  console.log(userAnswers, filteredQuestionList);
+
   return filteredQuestionList;
 };
 

@@ -11,6 +11,10 @@ const ReportProblem = () => {
 
   const sendUserProblem = async (e: MouseEvent<HTMLButtonElement> | FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!userProblem) {
+      setMessage('אנא רשום את בעייתך.');
+      return;
+    }
     if (form.current) {
       sendEmail(form.current).then(
         (result: EmailJSResponseStatus) => {
@@ -42,6 +46,7 @@ const ReportProblem = () => {
             id="userPhoneNumber"
             value={userPhoneNumber}
             className="user-phone-input"
+            readOnly
           />
           <textarea
             id="message"
