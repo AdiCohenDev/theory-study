@@ -13,6 +13,7 @@ interface IProps {
 
 const AnswerBox = ({ text, id, userAnswerId, saveUserProgress, showIfCorrect, isCorrect }: IProps) => {
   const showCorrectAnswerClasses = classNames('answer-container', {
+    'user-answer': userAnswerId === id && !showIfCorrect,
     'right-answer': showIfCorrect && isCorrect,
     'wrong-answer': showIfCorrect && !isCorrect && userAnswerId === id,
   });
