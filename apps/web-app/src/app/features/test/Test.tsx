@@ -48,11 +48,9 @@ const Test = () => {
   useEffect(() => {
     setCurrentQuestion(allTestQuestions[questionNum]);
 
-    if (showCorrectAnswer && questionNum === 0) {
-      const questionId: number = allTestQuestions[0].id;
-      const userAnswerId: number | undefined = userAnswers[questionId].answerId;
-      setUserAnswerId(userAnswerId);
-    }
+    const questionId: number = allTestQuestions[questionNum]?.id;
+    const userAnswerId: number | undefined = userAnswers[questionId]?.answerId;
+    setUserAnswerId(userAnswerId);
   }, [questionNum]);
 
   const fetchQuestionForTest = (resetTest?: boolean) => {
@@ -96,8 +94,14 @@ const Test = () => {
       questionId: currentQuestion.id,
       isCorrect,
     };
+
     userAnswers[allTestQuestions[questionNum].id] = fullUserAnswer;
-    nextQuestion();
+
+    if (questionNum < allTestQuestions.length - 1) {
+      nextQuestion();
+    } else {
+      return;
+    }
   };
 
   const prevQuestion = () => {
@@ -108,7 +112,6 @@ const Test = () => {
   const nextQuestion = () => {
     if (!showCorrectAnswer) {
       setUserAnswer(null);
-      setUserAnswerId(null!);
     }
 
     if (questionNum < allTestQuestions.length - 1) {
@@ -118,6 +121,7 @@ const Test = () => {
   const startNewTest = () => {
     setTestIsOver(false);
     setShowCorrectAnswer(false);
+    setUserAnswers({});
     fetchQuestionForTest(true);
   };
 
@@ -139,7 +143,6 @@ const Test = () => {
       personId,
       correctAnswerNum,
     };
-
     // todo: save user test in the DB
   };
 

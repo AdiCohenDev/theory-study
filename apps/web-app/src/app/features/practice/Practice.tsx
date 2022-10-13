@@ -172,19 +172,19 @@ const Practice = () => {
           <button className="level-btn" onClick={questionLevel}>
             {easy}
           </button>
-          <span>+1w</span>
+          <span>1w+</span>
         </div>
         <div>
           <button className="level-btn" onClick={questionLevel}>
             {middle}
           </button>
-          <span>+2d</span>
+          <span>2d+</span>
         </div>
         <div>
           <button className="level-btn" onClick={questionLevel}>
             {hard}
           </button>
-          <span>+1h</span>
+          <span>10m+</span>
         </div>
         <div>
           <button className="level-btn" onClick={questionLevel}>

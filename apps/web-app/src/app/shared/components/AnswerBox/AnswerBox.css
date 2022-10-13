@@ -1,3 +1,8 @@
+.user-answer {
+  background-color: #b7b7b7;
+}
+
+
 .answer-container {
   border: 1px solid var(--blue);
   width: 80%;
@@ -16,3 +21,4 @@
   background-color: var(--danger);
   color: white;
 }
+
