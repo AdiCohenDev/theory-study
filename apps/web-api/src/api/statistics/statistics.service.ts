@@ -6,12 +6,17 @@ interface IPieData {
   allQuestions: IAllQuestions[];
   allUserAnswers: IUserPracticeQuestions[];
 }
+
 export const getUserProgressData = async (id: any) => {
   const allQuestions = await getQuestionsAPI();
   const allUserAnswers = await getUserAnswersFromDB(id);
   const data = { allQuestions: allQuestions, allUserAnswers: allUserAnswers };
   const pieData = calculatePieData(data);
-  return pieData;
+  const userProgressData = {
+    pieData,
+    allQuestions,
+  };
+  return userProgressData;
 };
 
 const calculatePieData = (data: IPieData) => {

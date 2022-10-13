@@ -2,7 +2,7 @@ import store from '../../../stores/Store';
 import Axios from 'axios';
 import { getAPIURL } from '../practice/Questions';
 
-export const getUserPieData = async () => {
+export const getUserProgressData = async () => {
   const personId = store.getState().auth.user.uid;
   const url = getAPIURL();
   const response = await Axios.get(`${url}/statistics`, {
@@ -10,7 +10,12 @@ export const getUserPieData = async () => {
       personId,
     },
   }).then((res) => {
-    return res.data.pieData;
+    const progressData = {
+      pieData: res.data.pieData,
+      allQuestions: res.data.allQuestions,
+    };
+    return progressData;
   });
+
   return response;
 };

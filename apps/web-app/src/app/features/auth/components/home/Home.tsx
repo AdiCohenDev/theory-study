@@ -1,7 +1,6 @@
-import React from 'react';
-import ProgressPie from '../../../progress-pie/progressPie';
 import './Home.css';
 import { useNavigate } from 'react-router-dom';
+import UserProgress from '../../../progress-pie/UserProgress';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -21,7 +20,7 @@ const Home = () => {
           {/*</div>*/}
         </div>
         <hr />
-        <ProgressPie />
+        <UserProgress />
       </div>
     </>
   );
