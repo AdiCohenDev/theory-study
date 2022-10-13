@@ -12,6 +12,7 @@
 .loading {
   text-align: center;
 }
+
 @media only screen and (min-width: 1000px) {
   .pie-chart {
     width: 56%;

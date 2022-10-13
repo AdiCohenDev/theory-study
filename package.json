@@ -13,6 +13,7 @@
   "private": true,
   "dependencies": {
     "@emailjs/browser": "^3.6.2",
+    "@ramonak/react-progress-bar": "^5.0.2",
     "@react-icons/all-files": "^4.1.0",
     "@reduxjs/toolkit": "^1.8.1",
     "@types/pg": "^8.6.5",

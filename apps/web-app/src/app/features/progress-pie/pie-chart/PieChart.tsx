@@ -1,33 +1,25 @@
-import React, { useEffect, useState } from 'react';
 import { Pie } from 'react-chartjs-2';
 import { ArcElement, Chart as ChartJS, Legend, Tooltip } from 'chart.js';
-import { getUserPieData } from './Functions';
 import { Chart } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-import './ProgressPie.css';
+import './PieChart.css';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 Chart.register(ChartDataLabels);
+Chart.defaults.font.size = 14;
+Chart.defaults.font.family = "'Fredoka', sans-serif";
 
-const ProgressPie = () => {
-  const [pieData, setPieData] = useState<[number, number, number]>(null!);
+interface IProps {
+  pieChartData: [number, number, number];
+}
 
-  useEffect(() => {
-    getUserPieData()
-      .then((results) => {
-        setPieData(results);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, []);
-
+const PieChart = ({ pieChartData }: IProps) => {
   const data = {
     labels: ['שאלות חדשות', 'שאלות שבהן טעית', 'שאלות שבהן צדקת'],
     datasets: [
       {
         label: '# of Votes',
-        data: pieData,
+        data: pieChartData,
         backgroundColor: ['rgba(255,176,0,0.2)', 'rgba(235,54,75,0.2)', 'rgba(92,255,86,0.2)'],
         borderColor: ['rgb(255,176,0)', 'rgb(235,54,69)', 'rgb(92,255,86)'],
         borderWidth: 1,
@@ -53,12 +45,9 @@ const ProgressPie = () => {
 
   return (
     <>
-      <div className="pie-title">ההתקדמות שלי בתרגול: </div>
-      <div className="pie-chart">
-        {pieData ? <Pie data={data} options={options} /> : <div className="loading">Loading</div>}
-      </div>
+      <div className="pie-chart">{pieChartData ? <Pie data={data} options={options} /> : ''}</div>
     </>
   );
 };
 
-export default ProgressPie;
+export default PieChart;
