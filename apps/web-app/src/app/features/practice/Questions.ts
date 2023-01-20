@@ -1,19 +1,17 @@
-import type { UserAnswers } from './Practice';
 import Axios from 'axios';
-import { IAllQuestions, IUserAnswer, IUserPracticeQuestions } from '@theory-study/types';
+import {IAllQuestions, IUserAnswer, IUserPracticeQuestions} from '@theory-study/types';
 import store from '../../../stores/Store';
-import { shuffle } from 'lodash';
+import {shuffle} from 'lodash';
 
 export const fetchQuestionForUser = async () => {
   const allQuestions: IAllQuestions[] = await fetchAllQuestions();
   const userAnswers = await fetchUserAnswersFromDB();
-  const userPracticeData: UserAnswers = userAnswers;
+  const userPracticeData: IUserAnswer[] = userAnswers;
 
   const filteredQuestionList: IUserPracticeQuestions[] = allQuestions
     .filter((question: IAllQuestions) => {
-      // @ts-ignore
       const searchedQuestion = userPracticeData.find(
-        (practiceQuestion: any) => practiceQuestion.questionId === question.id.toString()
+        (practiceQuestion) => String(practiceQuestion.questionId) === question.id.toString()
       );
       const expDate = searchedQuestion?.expDate;
       const never = searchedQuestion?.never;
@@ -24,7 +22,7 @@ export const fetchQuestionForUser = async () => {
       if (never) {
         return false;
       }
-      return new Date(expDate).getTime() <= new Date().getTime();
+      return expDate && new Date(expDate).getTime() <= new Date().getTime();
     })
     .sort((a, b) => {
       const now = new Date().toISOString();
