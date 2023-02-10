@@ -34,7 +34,7 @@ const getQuestionsFromGov = async () => {
       const question = record.title2;
       newDiv.innerHTML = htmlText;
 
-      const questionRgx = /\d+./g;
+      const questionRgx = /\d+\./g;
       const newQuestion = question.replace(questionRgx, '');
       const answersEl = newDiv.querySelectorAll('li span');
       const imgEl = newDiv.querySelector('img');
